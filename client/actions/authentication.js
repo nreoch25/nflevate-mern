@@ -29,3 +29,22 @@ export function authError(error) {
     payload: error
   };
 }
+
+export function currentUser() {
+  return dispatch => {
+    axios.post("http://localhost:8000/auth/user").then(response => {
+      const user = response.data.user;
+      console.log("USER", user);
+      if (user) {
+        dispatch({
+          type: AUTHENTICATE_USER,
+          payload: user
+        });
+      } else {
+        dispatch({
+          type: UNAUTHENTICATE_USER
+        });
+      }
+    });
+  };
+}

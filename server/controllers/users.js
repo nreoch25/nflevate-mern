@@ -6,6 +6,7 @@ export default {
     router.get("/auth/google", this.getGoogleLogin);
     router.get("/auth/google/callback", this.getGoogleCallback);
     router.get("/auth/logout", this.getLogout);
+    router.post("/auth/user", this.getUser);
     router.post(
       "/auth/signup",
       userValidation.signupValidation,
@@ -40,5 +41,11 @@ export default {
   getLogout: function(req, res) {
     req.logout();
     res.redirect("/");
+  },
+  getUser: function(req, res) {
+    if (typeof req.user === "undefined") {
+      return res.send({ user: false });
+    }
+    res.send({ user: req.user });
   }
 };

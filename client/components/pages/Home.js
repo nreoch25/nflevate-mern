@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import requireAuth from "../hoc/requireAuth";
 
 class Home extends Component {
-  static propTypes = {
-    user: PropTypes.object
-  };
   render() {
-    console.log(this.props.user);
     return (
       <div>
         <h1>Mern Boilerplate Home</h1>
@@ -16,10 +13,4 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.auth.user
-  };
-}
-
-export default connect(mapStateToProps, null)(Home);
+export default requireAuth(Home);

@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import validator from "express-validator";
+import cors from "cors";
 import passport from "passport";
 import mongoose from "mongoose";
 import path from "path";
@@ -26,6 +27,7 @@ dbSetup();
 // require passport-google setup
 require("./passport/passport-local");
 require("./passport/passport-google");
+app.use(cors());
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -36,7 +38,7 @@ app.use(
   session({
     secret: serverConfig.expressSessionSecret,
     cookie: {
-      maxAge: 6000
+      maxAge: 3600000
     },
     resave: true,
     saveUninitialized: true,
