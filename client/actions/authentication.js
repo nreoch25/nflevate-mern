@@ -7,7 +7,7 @@ export const AUTHENTICATION_ERROR = "AUTHENTICATION_ERROR";
 export function signupUser({ username, email, password }, history) {
   return dispatch => {
     axios
-      .post("/auth/signup", { username, email, password })
+      .post("http://localhost:8000/auth/signup", { username, email, password })
       .then(response => {
         console.log("Successful Signup", response.data);
         dispatch({
@@ -23,6 +23,17 @@ export function signupUser({ username, email, password }, history) {
   };
 }
 
+export function logoutUser(history) {
+  return dispatch => {
+    axios.post("http://localhost:8000/auth/logout").then(() => {
+      dispatch({
+        type: UNAUTHENTICATE_USER
+      });
+      history.push("/");
+    });
+  };
+}
+
 export function authError(error) {
   return {
     type: AUTHENTICATION_ERROR,
@@ -34,7 +45,7 @@ export function currentUser() {
   return dispatch => {
     axios.post("http://localhost:8000/auth/user").then(response => {
       const user = response.data.user;
-      console.log("USER", user);
+      console.log("Current User", user);
       if (user) {
         dispatch({
           type: AUTHENTICATE_USER,
