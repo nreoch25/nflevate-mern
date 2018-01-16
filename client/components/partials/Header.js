@@ -10,31 +10,35 @@ class Header extends Component {
   renderLinks() {
     if (this.props.authenticated === true) {
       return (
-        <ul className="nav navbar-nav navbar-right">
-          <li>
-            <a
-              style={{ cursor: "pointer" }}
-              onClick={this.handleLogout.bind(this)}
-            >
-              <span className="glyphicon glyphicon-log-out" /> Logout
-            </a>
-          </li>
-        </ul>
+        <div className="collapse navbar-collapse" id="myNavbar">
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <a
+                style={{ cursor: "pointer" }}
+                onClick={this.handleLogout.bind(this)}
+              >
+                <span className="glyphicon glyphicon-log-out" /> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
       );
     } else {
       return (
-        <ul className="nav navbar-nav navbar-right">
-          <li>
-            <Link to="/signup">
-              <span className="glyphicon glyphicon-user" /> Sign Up
-            </Link>
-          </li>
-          <li>
-            <Link to="/">
-              <span className="glyphicon glyphicon-log-in" /> Login
-            </Link>
-          </li>
-        </ul>
+        <div className="collapse navbar-collapse" id="myNavbar">
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <Link to="/signup">
+                <span className="glyphicon glyphicon-user" /> Sign Up
+              </Link>
+            </li>
+            <li>
+              <Link to="/">
+                <span className="glyphicon glyphicon-log-in" /> Login
+              </Link>
+            </li>
+          </ul>
+        </div>
       );
     }
   }
@@ -45,6 +49,16 @@ class Header extends Component {
           <nav className="navbar navbar-inverse navbar-static-top">
             <div className="container-fluid">
               <div className="navbar-header">
+                <button
+                  type="button"
+                  className="navbar-toggle"
+                  data-toggle="collapse"
+                  data-target="#myNavbar"
+                >
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
+                  <span className="icon-bar" />
+                </button>
                 <Link to="/home" className="navbar-brand">
                   NFLevate
                 </Link>
