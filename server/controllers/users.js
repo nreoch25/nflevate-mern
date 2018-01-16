@@ -8,6 +8,26 @@ export default {
     router.post("/auth/logout", this.userLogout);
     router.post("/auth/user", this.currentUser);
     router.post(
+      "/auth/login",
+      userValidation.loginValidation,
+      (req, res, next) => {
+        passport.authenticate("local.login", (err, user, info) => {
+          if (err) {
+            return next(err);
+          }
+          if (!user) {
+            return res.status(422).send({ error: "Invalid login credentials" });
+          }
+          req.login(user, err => {
+            if (err) {
+              return next(err);
+            }
+            return res.send({ user: req.user.username });
+          });
+        })(req, res, next);
+      }
+    );
+    router.post(
       "/auth/signup",
       userValidation.signupValidation,
       (req, res, next) => {
@@ -46,6 +66,6 @@ export default {
     if (typeof req.user === "undefined") {
       return res.send({ user: false });
     }
-    res.send({ user: req.user });
+    res.send({ user: req.user.username });
   }
 };

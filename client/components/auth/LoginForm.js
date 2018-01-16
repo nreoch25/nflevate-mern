@@ -1,29 +1,21 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Field, reduxForm, propTypes } from "redux-form";
-//import { withRouter } from "react-router";
-//import { connect } from "react-redux";
-//import { loginUser } from "../../actions/authentication";
+import { withRouter } from "react-router";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/authentication";
 
 const required = value => (value ? undefined : "Required");
 
 class LoginForm extends Component {
-  // static propTypes = {
-  //   ...propTypes,
-  //   loginUser: PropTypes.func,
-  //   errorMessage: PropTypes.string
-  // };
-
-  renderAlert() {
-    if (this.props.errorMessage) {
-      return (
-        <div className="alert alert-danger">{this.props.errorMessage}</div>
-      );
-    }
-  }
+  static propTypes = {
+    ...propTypes,
+    loginUser: PropTypes.func,
+    errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+  };
   handleFormSubmit = values => {
-    console.log("SUBMIT");
-    //this.props.loginUser(values, this.props.history);
+    // call action creator for login user
+    this.props.loginUser(values, this.props.history);
   };
   renderField = ({ input, label, type, meta: { touched, error } }) => (
     <div>
@@ -39,6 +31,22 @@ class LoginForm extends Component {
         ))}
     </div>
   );
+  renderAlert() {
+    if (this.props.errorMessage) {
+      if (Array.isArray(this.props.errorMessage)) {
+        return this.props.errorMessage.map((error, i) => {
+          return (
+            <div key={i} className="alert alert-danger">
+              {error}
+            </div>
+          );
+        });
+      }
+      return (
+        <div className="alert alert-danger">{this.props.errorMessage}</div>
+      );
+    }
+  }
   render() {
     return (
       <div className="row vertical-offset-100">
@@ -88,8 +96,12 @@ class LoginForm extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.error };
+}
+
 LoginForm = reduxForm({
   form: "login"
 })(LoginForm);
 
-export default LoginForm;
+export default withRouter(connect(mapStateToProps, { loginUser })(LoginForm));

@@ -23,6 +23,25 @@ export function signupUser({ username, email, password }, history) {
   };
 }
 
+export function loginUser({ email, password }, history) {
+  return dispatch => {
+    axios
+      .post("http://localhost:8000/auth/login", { email, password })
+      .then(response => {
+        console.log("Successful Login", response.data);
+        dispatch({
+          type: AUTHENTICATE_USER,
+          payload: response.data
+        });
+        history.push("/home");
+      })
+      .catch(error => {
+        console.log("Failed Login", error.response.data.error);
+        dispatch(authError(error.response.data.error));
+      });
+  };
+}
+
 export function logoutUser(history) {
   return dispatch => {
     axios.post("http://localhost:8000/auth/logout").then(() => {

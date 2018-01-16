@@ -54,11 +54,8 @@ passport.use(
         if (err) {
           return done(err);
         }
-
-        const messages = [];
         if (!user || !user.validUserPassword(password)) {
-          messages.push("Email does not exist or password is Invalid");
-          return done(null, false, req.flash("error", messages));
+          return done(null, false);
         }
 
         return done(null, user);
