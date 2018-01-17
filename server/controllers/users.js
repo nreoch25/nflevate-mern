@@ -22,7 +22,9 @@ export default {
             if (err) {
               return next(err);
             }
-            return res.send({ user: req.user.username });
+            return res.send({
+              user: { username: req.user.username, type: req.user.type }
+            });
           });
         })(req, res, next);
       }
@@ -45,7 +47,9 @@ export default {
             if (err) {
               return next(err);
             }
-            return res.send({ user: req.user.username });
+            return res.send({
+              user: { username: req.user.username, type: req.user.type }
+            });
           });
         })(req, res, next);
       }
@@ -66,6 +70,6 @@ export default {
     if (typeof req.user === "undefined") {
       return res.send({ user: false });
     }
-    res.send({ user: req.user.username });
+    res.send({ user: { username: req.user.username, type: req.user.type } });
   }
 };

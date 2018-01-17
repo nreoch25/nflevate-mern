@@ -7,6 +7,7 @@ const userSchema = Schema({
   fullname: { type: String },
   email: { type: String, unique: true, lowercase: true },
   password: { type: String, default: "" },
+  type: { type: String, default: "user" },
   userImage: { type: String, default: "default.png" },
   google: { type: String, default: "" },
   sentRequest: [

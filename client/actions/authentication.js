@@ -9,10 +9,10 @@ export function signupUser({ username, email, password }, history) {
     axios
       .post("http://localhost:8000/auth/signup", { username, email, password })
       .then(response => {
-        console.log("Successful Signup", response.data);
+        console.log("Successful Signup", response.data.user);
         dispatch({
           type: AUTHENTICATE_USER,
-          payload: response.data
+          payload: response.data.user
         });
         history.push("/home");
       })
@@ -28,10 +28,10 @@ export function loginUser({ email, password }, history) {
     axios
       .post("http://localhost:8000/auth/login", { email, password })
       .then(response => {
-        console.log("Successful Login", response.data);
+        console.log("Successful Login", response.data.user);
         dispatch({
           type: AUTHENTICATE_USER,
-          payload: response.data
+          payload: response.data.user
         });
         history.push("/home");
       })

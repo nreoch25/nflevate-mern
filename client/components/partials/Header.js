@@ -8,6 +8,7 @@ class Header extends Component {
     this.props.logoutUser(this.props.history);
   }
   renderLinks() {
+    console.log("AUTHENTICATED USER", this.props.user);
     if (this.props.authenticated === true) {
       return (
         <div className="collapse navbar-collapse" id="myNavbar">
@@ -74,7 +75,8 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    user: state.auth.user
   };
 }
 
