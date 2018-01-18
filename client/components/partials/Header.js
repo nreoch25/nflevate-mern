@@ -7,12 +7,24 @@ class Header extends Component {
   handleLogout() {
     this.props.logoutUser(this.props.history);
   }
+  checkAdmin() {
+    if (this.props.user && this.props.user.type === "admin") {
+      return (
+        <li>
+          <Link to="/admin">
+            <span className="glyphicon glyphicon-edit" /> Admin
+          </Link>
+        </li>
+      );
+    }
+  }
   renderLinks() {
     console.log("AUTHENTICATED USER", this.props.user);
     if (this.props.authenticated === true) {
       return (
         <div className="collapse navbar-collapse" id="myNavbar">
           <ul className="nav navbar-nav navbar-right">
+            {this.checkAdmin()}
             <li>
               <a
                 style={{ cursor: "pointer" }}
