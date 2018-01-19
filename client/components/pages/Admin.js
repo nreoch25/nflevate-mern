@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import requireAdmin from "../hoc/requireAdmin";
 
 class Admin extends Component {
   render() {
@@ -10,4 +11,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default requireAdmin(Admin);
