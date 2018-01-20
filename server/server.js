@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import validator from "express-validator";
 import cors from "cors";
+import fileUpload from "express-fileupload";
 import passport from "passport";
 import mongoose from "mongoose";
 import path from "path";
@@ -13,6 +14,7 @@ import devServer from "./utils/devServer";
 import dbSetup from "./utils/dbSetup";
 import reactApp from "./utils/reactApp";
 import users from "./controllers/users";
+import admin from "./controllers/admin";
 
 const MongoStore = require("connect-mongo")(session);
 
@@ -31,7 +33,7 @@ app.use(cors());
 app.use(compression());
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, "../dist")));
 app.use(validator());
 app.use(
@@ -45,7 +47,7 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
-
+app.use(fileUpload());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -53,6 +55,7 @@ app.use(passport.session());
 const router = express.Router();
 
 users.setRouting(router);
+admin.setRouting(router);
 
 app.use(router);
 

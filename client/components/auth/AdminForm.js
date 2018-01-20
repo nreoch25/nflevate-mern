@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Field, reduxForm, propTypes } from "redux-form";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
+import axios from "axios";
 
 const required = value => (value ? undefined : "Required");
 
@@ -13,8 +14,19 @@ class AdminForm extends Component {
   }
   handleFormSubmit(evt) {
     evt.preventDefault();
-    console.log("GroupName", this.groupName.value);
-    console.log("FileUpload", this.fileUpload.files);
+    const data = new FormData();
+    data.append("groupName", this.groupName.value);
+    data.append("image", this.fileUpload.files[0]);
+    fetch("http://localhost:8000/api/group", {
+      method: "POST",
+      body: data
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        console.log(response);
+      });
   }
   render() {
     return (
