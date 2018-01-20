@@ -47,7 +47,7 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
-app.use(fileUpload());
+//app.use(fileUpload());
 app.use(passport.initialize());
 app.use(passport.session());
 

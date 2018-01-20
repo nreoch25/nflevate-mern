@@ -2392,7 +2392,7 @@ expect@1.20.2:
     object-keys "^1.0.9"
     tmatch "^2.0.1"
 
-express-fileupload@^0.3.0:
+express-fileupload@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/express-fileupload/-/express-fileupload-0.3.0.tgz#d1b77b56e5b50e5f22f8326894c4f25b6ccba1b7"
   dependencies:
@@ -2626,6 +2626,10 @@ form-data@~2.3.1:
     asynckit "^0.4.0"
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
+
+formidable@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.1.1.tgz#96b8886f7c3c3508b932d6bd70c4d3a88f35f1a9"
 
 forwarded@~0.1.0:
   version "0.1.2"
