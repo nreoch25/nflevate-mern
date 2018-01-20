@@ -14,6 +14,7 @@ class AdminForm extends Component {
   handleFormSubmit(evt) {
     evt.preventDefault();
     console.log("GroupName", this.groupName.value);
+    console.log("FileUpload", this.fileUpload.files);
   }
   render() {
     return (
@@ -33,6 +34,18 @@ class AdminForm extends Component {
                     }}
                     className="form-control"
                     type="input"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Upload Group Image:</label>
+                  <input
+                    ref={ref => {
+                      this.fileUpload = ref;
+                    }}
+                    className="form-control"
+                    type="file"
+                    required
                   />
                 </div>
                 <button
