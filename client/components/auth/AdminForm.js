@@ -11,6 +11,18 @@ class AdminForm extends Component {
   constructor(props) {
     super(props);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.state = {
+      message: "",
+      error: ""
+    };
+  }
+  renderMessage() {
+    if (this.state.message !== "") {
+      this.groupName.value = "";
+      this.fileUpload.files = null;
+      this.fileUpload.value = "";
+      return <div className="alert alert-success">{this.state.message}</div>;
+    }
   }
   handleFormSubmit(evt) {
     evt.preventDefault();
@@ -19,13 +31,14 @@ class AdminForm extends Component {
     data.append("image", this.fileUpload.files[0]);
     fetch("http://localhost:8000/api/group", {
       method: "POST",
-      body: data
+      body: data,
+      credentials: "include"
     })
       .then(response => {
         return response.json();
       })
       .then(response => {
-        console.log(response);
+        this.setState({ message: response.message });
       });
   }
   render() {
@@ -60,6 +73,7 @@ class AdminForm extends Component {
                     required
                   />
                 </div>
+                {this.renderMessage()}
                 <button
                   type="submit"
                   className="btn btn-lg btn-success btn-block"

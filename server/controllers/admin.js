@@ -1,9 +1,10 @@
 import fileUpload from "../utils/fileUpload";
+import requireAdmin from "../middleware/requireAdmin";
 import Group from "../models/group";
 
 export default {
   setRouting: function(router) {
-    router.post("/api/group", this.postGroup);
+    router.post("/api/group", requireAdmin, this.postGroup);
   },
   postGroup: function(req, res) {
     fileUpload(

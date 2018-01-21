@@ -1,5 +1,5 @@
 import passport from "passport";
-import userValidation from "../utils/userValidation";
+import userValidation from "../middleware/userValidation";
 
 export default {
   setRouting: function(router) {
