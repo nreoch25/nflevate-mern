@@ -25,13 +25,21 @@ class Header extends Component {
         <div className="collapse navbar-collapse" id="myNavbar">
           <ul className="nav navbar-nav navbar-right">
             {this.checkAdmin()}
-            <li>
-              <a
-                style={{ cursor: "pointer" }}
-                onClick={this.handleLogout.bind(this)}
-              >
-                <span className="glyphicon glyphicon-log-out" /> Logout
+            <li className="dropdown">
+              <a className="dropdown-toggle" data-toggle="dropdown" href="#">
+                {this.props.user.username}
+                <span className="caret" />
               </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a
+                    style={{ cursor: "pointer" }}
+                    onClick={this.handleLogout.bind(this)}
+                  >
+                    <span className="glyphicon glyphicon-log-out" /> Logout
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
