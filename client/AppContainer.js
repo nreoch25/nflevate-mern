@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 import Header from "./components/partials/Header";
+import Footer from "./components/partials/Footer";
 import * as Routes from "./Routes";
 
 const App = () => (
@@ -27,6 +28,7 @@ const App = () => (
         </div>
       )}
     />
+    <Footer />
   </div>
 );
 
