@@ -15,6 +15,7 @@ import dbSetup from "./utils/dbSetup";
 import reactApp from "./utils/reactApp";
 import users from "./controllers/users";
 import admin from "./controllers/admin";
+import groups from "./controllers/groups";
 
 const MongoStore = require("connect-mongo")(session);
 
@@ -56,6 +57,7 @@ const router = express.Router();
 
 users.setRouting(router);
 admin.setRouting(router);
+groups.setRouting(router);
 
 app.use(router);
 

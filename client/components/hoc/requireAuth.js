@@ -9,6 +9,7 @@ export default WrappedComponent => {
       this.props.currentUser();
     }
     render() {
+      console.log("Authenticated", this.props.authenticated);
       switch (this.props.authenticated) {
         case false:
           return <Redirect to="/" />;

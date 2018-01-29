@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import requireAuth from "../hoc/requireAuth";
+import { fetchGroups } from "../../actions/groups.js";
 
 class Home extends Component {
+  componentWillMount() {
+    this.props.fetchGroups();
+  }
   render() {
+    console.log("GROUPS", this.props.groups);
     return (
       <div className="container">
         <div className="row">
@@ -46,4 +52,11 @@ class Home extends Component {
   }
 }
 
-export default requireAuth(Home);
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    groups: state.groups.groups
+  };
+}
+
+export default requireAuth(connect(mapStateToProps, { fetchGroups })(Home));
