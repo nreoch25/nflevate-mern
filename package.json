@@ -34,6 +34,7 @@
     "passport": "0.4.0",
     "passport-google-oauth20": "1.0.0",
     "passport-local": "1.0.0",
+    "passport.socketio": "^3.7.0",
     "react": "16.2.0",
     "react-context-component": "0.0.6",
     "react-dom": "16.2.0",
@@ -43,7 +44,8 @@
     "redux": "3.6.0",
     "redux-form": "7.2.0",
     "redux-thunk": "2.1.0",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",

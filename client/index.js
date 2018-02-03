@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AppContainer } from "react-hot-loader";
 import { loadComponents } from "loadable-components";
 import { Provider } from "react-redux";
+import io from "socket.io-client";
 import App from "./AppContainer";
 import { configureStore } from "./store";
 
@@ -12,6 +13,8 @@ require("./styles/main.css");
 
 // Initialize store
 const store = configureStore(window.__INITIAL_STATE__);
+
+window.NFLevateSocket = io();
 
 const mountApp = document.getElementById("root");
 

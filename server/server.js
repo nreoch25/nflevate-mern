@@ -7,20 +7,27 @@ import validator from "express-validator";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 import passport from "passport";
+import passportSocketIO from "passport.socketio";
 import mongoose from "mongoose";
 import path from "path";
+import http from "http";
 import serverConfig from "./config";
 import devServer from "./utils/devServer";
 import dbSetup from "./utils/dbSetup";
 import reactApp from "./utils/reactApp";
+// mongodb imports
 import users from "./controllers/users";
 import admin from "./controllers/admin";
 import groups from "./controllers/groups";
-
+// import connect mongo
 const MongoStore = require("connect-mongo")(session);
 
 // Initialize the Express app
 const app = new express();
+// Initialize the server for express and socket.io
+const server = http.createServer(app);
+// import socket.io
+const io = require("socket.io")(server);
 // Initialize webpack dev middleware
 devServer(app);
 // Start the database
@@ -37,6 +44,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, "../dist")));
 app.use(validator());
+// Initialize session store
+const sessionStore = new MongoStore({
+  mongooseConnection: mongoose.connection
+});
 app.use(
   session({
     secret: serverConfig.expressSessionSecret,
@@ -45,7 +56,19 @@ app.use(
     },
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    store: sessionStore
+  })
+);
+// Initialize passport socketIO
+// Allows us to authenticate socketIO requests
+// Based on req.user
+io.use(
+  passportSocketIO.authorize({
+    key: "connect.sid",
+    secret: serverConfig.expressSessionSecret,
+    store: sessionStore,
+    passport: passport,
+    cookieParser: cookieParser
   })
 );
 //app.use(fileUpload());
@@ -64,7 +87,7 @@ app.use(router);
 // Reach Application
 app.get("*", reactApp);
 
-app.listen(serverConfig.port, error => {
+server.listen(serverConfig.port, error => {
   if (!error) {
     console.log(`Application is running on port: ${serverConfig.port}`);
   }
