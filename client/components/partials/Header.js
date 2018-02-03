@@ -24,6 +24,20 @@ class Header extends Component {
       return (
         <div className="collapse navbar-collapse" id="myNavbar">
           <ul className="nav navbar-nav navbar-right">
+            <li className="dropdown">
+              <a className="dropdown-toggle" data-toggle="dropdown" href="#">
+                <span className="glyphicon fa fa-bell nav-glyphicon" />
+                <b className="caret" />
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <a style={{ cursor: "pointer" }}>
+                    <span className="glyphicon glyphicon-user" /> Friend
+                    Requests
+                  </a>
+                </li>
+              </ul>
+            </li>
             {this.checkAdmin()}
             <li className="dropdown">
               <a className="dropdown-toggle" data-toggle="dropdown" href="#">
