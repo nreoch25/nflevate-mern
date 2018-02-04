@@ -1,17 +1,18 @@
-import Global from "../sockets/Global";
+import online from "../controllers/online";
 
 class SocketIO {
   static connection() {
+    // initialize globalRoom instance
     // initialize Global class
     this.io.on("connection", socket => {
-      console.log("connected to socket.io", socket.request.user);
+      console.log("connected to socket.io");
       // join the global room
-      socket.join("global");
-      Global.addUser(socket.id, socket.request.user);
+      socket.join("online");
+      online.addOnlineUser(socket.request.user);
 
       socket.on("disconnect", () => {
         console.log("user disconnected");
-        Global.removeUser(socket.id);
+        online.removeOnlineUser(socket.request.user);
       });
     });
   }

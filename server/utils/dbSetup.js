@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import serverConfig from "../config";
 
 export default () => {
-  console.log("HERE");
   mongoose.Promise = global.Promise;
   mongoose.connect(serverConfig.mongoURI, { useMongoClient: true }, err => {
     if (err) {
