@@ -89,6 +89,9 @@ app.get("*", reactApp);
 // this will only connect if user has a valid passport session
 io.on("connection", socket => {
   console.log("connected to socket.io", socket.request.user);
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
 
 server.listen(serverConfig.port, error => {

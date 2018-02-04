@@ -4,9 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import { AppContainer } from "react-hot-loader";
 import { loadComponents } from "loadable-components";
 import { Provider } from "react-redux";
-import io from "socket.io-client";
 import App from "./AppContainer";
 import { configureStore } from "./store";
+import SocketIO from "./utils/SocketIO";
 
 // Base stylesheet
 require("./styles/main.css");
@@ -14,7 +14,10 @@ require("./styles/main.css");
 // Initialize store
 const store = configureStore(window.__INITIAL_STATE__);
 
-const socket = io();
+// this will attempt to initiate the socket.io connection
+// If you are not authenticated on the server this will
+// not connect and this.socket.connected will be false in the socketIO class
+SocketIO.init();
 
 const mountApp = document.getElementById("root");
 

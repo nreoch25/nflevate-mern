@@ -19,7 +19,6 @@ class Header extends Component {
     }
   }
   renderLinks() {
-    console.log("AUTHENTICATED USER", this.props.user);
     if (this.props.authenticated === true) {
       return (
         <div className="collapse navbar-collapse" id="myNavbar">

@@ -1,4 +1,5 @@
 import axios from "axios";
+import SocketIO from "../utils/SocketIO";
 
 export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
 export const UNAUTHENTICATE_USER = "UNAUTHENTICATE_USER";
@@ -10,6 +11,13 @@ export function signupUser({ username, email, password }, history) {
       .post("http://localhost:8000/auth/signup", { username, email, password })
       .then(response => {
         console.log("Successful Signup", response.data.user);
+
+        // initiate socket.io only if user wasn't already authenticated
+        // this is just to make sure we don't initiate multiple sockets
+        if (SocketIO.check() === false) {
+          SocketIO.init();
+        }
+
         dispatch({
           type: AUTHENTICATE_USER,
           payload: response.data.user
@@ -29,6 +37,13 @@ export function loginUser({ email, password }, history) {
       .post("http://localhost:8000/auth/login", { email, password })
       .then(response => {
         console.log("Successful Login", response.data.user);
+
+        // initiate socket.io only if user wasn't already authenticated
+        // this is just to make sure we don't initiate multiple sockets
+        if (SocketIO.check() === false) {
+          SocketIO.init();
+        }
+
         dispatch({
           type: AUTHENTICATE_USER,
           payload: response.data.user
@@ -45,6 +60,9 @@ export function loginUser({ email, password }, history) {
 export function logoutUser(history) {
   return dispatch => {
     axios.post("http://localhost:8000/auth/logout").then(() => {
+      // disconnect socketIO
+      SocketIO.disconnect();
+
       dispatch({
         type: UNAUTHENTICATE_USER
       });
