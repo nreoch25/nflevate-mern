@@ -8,7 +8,6 @@ class Home extends Component {
     this.props.fetchGroups();
   }
   render() {
-    console.log("GROUPS", this.props.groups);
     return (
       <div className="container">
         <div className="row">

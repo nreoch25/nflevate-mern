@@ -14,7 +14,7 @@ require("./styles/main.css");
 // Initialize store
 const store = configureStore(window.__INITIAL_STATE__);
 
-window.NFLevateSocket = io();
+const socket = io();
 
 const mountApp = document.getElementById("root");
 

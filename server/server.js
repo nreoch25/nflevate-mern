@@ -61,7 +61,6 @@ app.use(
 );
 // Initialize passport socketIO
 // Allows us to authenticate socketIO requests
-// Based on req.user
 io.use(
   passportSocketIO.authorize({
     key: "connect.sid",
@@ -86,6 +85,11 @@ app.use(router);
 
 // Reach Application
 app.get("*", reactApp);
+
+// this will only connect if user has a valid passport session
+io.on("connection", socket => {
+  console.log("connected to socket.io", socket.request.user);
+});
 
 server.listen(serverConfig.port, error => {
   if (!error) {
