@@ -63,6 +63,7 @@ export default {
     failureRedirect: "/signup"
   }),
   userLogout: function(req, res) {
+    req.session.destroy();
     req.logout();
     res.send({ message: "Successfully logged out" });
   },

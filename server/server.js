@@ -19,6 +19,8 @@ import reactApp from "./utils/reactApp";
 import users from "./controllers/users";
 import admin from "./controllers/admin";
 import groups from "./controllers/groups";
+// SocketIO class
+import SocketIO from "./utils/SocketIO";
 // import connect mongo
 const MongoStore = require("connect-mongo")(session);
 
@@ -86,13 +88,8 @@ app.use(router);
 // Reach Application
 app.get("*", reactApp);
 
-// this will only connect if user has a valid passport session
-io.on("connection", socket => {
-  console.log("connected to socket.io", socket.request.user);
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
-  });
-});
+// Initialize SocketIO
+SocketIO.init(io);
 
 server.listen(serverConfig.port, error => {
   if (!error) {
