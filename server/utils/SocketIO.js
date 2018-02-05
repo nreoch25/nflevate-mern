@@ -6,13 +6,47 @@ class SocketIO {
     // initialize Global class
     this.io.on("connection", socket => {
       console.log("connected to socket.io");
-      // join the global room
-      socket.join("online");
-      online.addOnlineUser(socket.request.user);
+      // add the user to the db as an online user
+      online
+        .addOnlineUser(socket.request.user)
+        .then(user => {
+          console.log("ONLINE USERS - ADDED", user);
+          // get all the online users from the db
+          online
+            .getOnlineUsers()
+            .then(users => {
+              console.log("ALL ONLINE USERS", users);
+              // emit the online users to the client
+              socket.emit("online users", users);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        })
+        .catch(error => {
+          console.log(error);
+        });
 
       socket.on("disconnect", () => {
         console.log("user disconnected");
-        online.removeOnlineUser(socket.request.user);
+        // remove the user from the db as an online user
+        online
+          .removeOnlineUser(socket.request.user)
+          .then(user => {
+            console.log("ONLINE USERS - REMOVE");
+            // get all the online users from the db
+            online
+              .getOnlineUsers()
+              .then(users => {
+                console.log("ALL ONLINE USERS", users);
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          })
+          .catch(error => {
+            console.log(error);
+          });
       });
     });
   }
