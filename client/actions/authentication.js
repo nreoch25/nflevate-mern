@@ -12,12 +12,6 @@ export function signupUser({ username, email, password }, history) {
       .then(response => {
         console.log("Successful Signup", response.data.user);
 
-        // initiate socket.io only if user wasn't already authenticated
-        // this is just to make sure we don't initiate multiple sockets
-        if (SocketIO.check() === false) {
-          SocketIO.init();
-        }
-
         dispatch({
           type: AUTHENTICATE_USER,
           payload: response.data.user
@@ -37,12 +31,6 @@ export function loginUser({ email, password }, history) {
       .post("http://localhost:8000/auth/login", { email, password })
       .then(response => {
         console.log("Successful Login", response.data.user);
-
-        // initiate socket.io only if user wasn't already authenticated
-        // this is just to make sure we don't initiate multiple sockets
-        if (SocketIO.check() === false) {
-          SocketIO.init();
-        }
 
         dispatch({
           type: AUTHENTICATE_USER,
@@ -84,6 +72,14 @@ export function currentUser() {
       const user = response.data.user;
       console.log("Current User", user);
       if (user) {
+        // initiate socket.io only if user wasn't already authenticated
+        // this is just to make sure we don't initiate multiple sockets
+        if (SocketIO.check() === false) {
+          SocketIO.init();
+        }
+
+        SocketIO.online();
+
         dispatch({
           type: AUTHENTICATE_USER,
           payload: user

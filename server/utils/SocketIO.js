@@ -17,7 +17,7 @@ class SocketIO {
             .then(users => {
               console.log("ALL ONLINE USERS", users);
               // emit the online users to the client
-              socket.emit("online users", users);
+              this.io.emit("online", users);
             })
             .catch(error => {
               console.log(error);
@@ -26,6 +26,17 @@ class SocketIO {
         .catch(error => {
           console.log(error);
         });
+
+      socket.on("online", () => {
+        online
+          .getOnlineUsers()
+          .then(users => {
+            this.io.emit("online", users);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      });
 
       socket.on("disconnect", () => {
         console.log("user disconnected");
@@ -39,6 +50,8 @@ class SocketIO {
               .getOnlineUsers()
               .then(users => {
                 console.log("ALL ONLINE USERS", users);
+                // emit the online users to the client
+                this.io.emit("online", users);
               })
               .catch(error => {
                 console.log(error);

@@ -18,6 +18,9 @@ const store = configureStore(window.__INITIAL_STATE__);
 // If you are not authenticated on the server this will
 // not connect and this.socket.connected will be false in the socketIO class
 SocketIO.init();
+// get the online users for the initial loaded authed users
+// these users will have a valid session
+SocketIO.initialOnline();
 
 const mountApp = document.getElementById("root");
 

@@ -52,7 +52,6 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     groups: state.groups.groups
   };

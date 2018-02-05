@@ -20,7 +20,7 @@ import users from "./controllers/users";
 import admin from "./controllers/admin";
 import groups from "./controllers/groups";
 // SocketIO class
-import SocketIO from "./utils/SocketIO";
+import SocketIO from "./sockets/SocketIO";
 // import connect mongo
 const MongoStore = require("connect-mongo")(session);
 
@@ -54,10 +54,10 @@ app.use(
   session({
     secret: serverConfig.expressSessionSecret,
     cookie: {
-      maxAge: 3600000
+      maxAge: 120000
     },
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: sessionStore
   })
 );
