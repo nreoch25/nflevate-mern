@@ -1,4 +1,5 @@
 import io from "socket.io-client";
+import { ONLINE_USERS } from "../actions/authentication";
 
 class SocketIO {
   static initialOnline() {
@@ -6,10 +7,13 @@ class SocketIO {
   }
   static online() {
     if (this.onlineSet === false) {
-      console.log("***HERE***");
       this.onlineSet = true;
       this.socket.on("online", users => {
         console.log("CLIENT ONLINE USERS", users);
+        this.dispatch({
+          type: ONLINE_USERS,
+          payload: users
+        });
       });
     }
   }
@@ -21,10 +25,11 @@ class SocketIO {
     // disconnect socketIO on user logout
     this.socket.disconnect();
   }
-  static init() {
+  static init(dispatch) {
     // initiate socketIO connection
     this.socket = io.connect();
     this.onlineSet = false;
+    this.dispatch = dispatch;
   }
 }
 

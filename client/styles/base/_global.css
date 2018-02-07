@@ -30,3 +30,8 @@
 .margin-top-15 {
   margin-top: 15px;
 }
+.online {
+  font-size: 10px;
+  color: rgba(129, 191, 57, 0.95);
+  margin-right: 10px;
+}

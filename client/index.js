@@ -6,7 +6,7 @@ import { loadComponents } from "loadable-components";
 import { Provider } from "react-redux";
 import App from "./AppContainer";
 import { configureStore } from "./store";
-import SocketIO from "./utils/SocketIO";
+import SocketIO from "./sockets/SocketIO";
 
 // Base stylesheet
 require("./styles/main.css");
@@ -17,7 +17,7 @@ const store = configureStore(window.__INITIAL_STATE__);
 // this will attempt to initiate the socket.io connection
 // If you are not authenticated on the server this will
 // not connect and this.socket.connected will be false in the socketIO class
-SocketIO.init();
+SocketIO.init(store.dispatch);
 // get the online users for the initial loaded authed users
 // these users will have a valid session
 SocketIO.initialOnline();

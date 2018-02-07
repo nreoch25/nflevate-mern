@@ -1,9 +1,10 @@
 import axios from "axios";
-import SocketIO from "../utils/SocketIO";
+import SocketIO from "../sockets/SocketIO";
 
 export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
 export const UNAUTHENTICATE_USER = "UNAUTHENTICATE_USER";
 export const AUTHENTICATION_ERROR = "AUTHENTICATION_ERROR";
+export const ONLINE_USERS = "ONLINE_USERS";
 
 export function signupUser({ username, email, password }, history) {
   return dispatch => {
@@ -75,7 +76,7 @@ export function currentUser() {
         // initiate socket.io only if user wasn't already authenticated
         // this is just to make sure we don't initiate multiple sockets
         if (SocketIO.check() === false) {
-          SocketIO.init();
+          SocketIO.init(dispatch);
         }
 
         SocketIO.online();

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import requireAuth from "../hoc/requireAuth";
 import { fetchGroups } from "../../actions/groups.js";
 
+import OnlineUsers from "../partials/OnlineUsers";
+
 class Home extends Component {
   componentWillMount() {
     this.props.fetchGroups();
@@ -43,7 +45,9 @@ class Home extends Component {
             </div>
           </div>
           <div className="col-sm-4" style={{ backgroundColor: "#ffffff" }}>
-            col4
+            <div className="row">
+              <OnlineUsers />
+            </div>
           </div>
         </div>
       </div>
