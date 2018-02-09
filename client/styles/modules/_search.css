@@ -1,0 +1,29 @@
+.search-style {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.new-search-bar {
+  padding-left: 20px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  height: 52px;
+  font-size: 17px;
+  border: 1px;
+}
+
+.input-btn {
+  background: #4aa1f3;
+  border-top-right-radius: 25px !important;
+  border-bottom-right-radius: 25px !important;
+  padding-left: 23px;
+  padding-right: 23px;
+  border: none;
+  height: 52px;
+  font-size: 15px;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.3px;
+  text-shadow: none;
+  color: white !important;
+}

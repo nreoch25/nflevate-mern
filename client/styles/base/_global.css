@@ -35,3 +35,6 @@
   color: rgba(129, 191, 57, 0.95);
   margin-right: 10px;
 }
+.no-padding-left {
+  padding-left: 0;
+}

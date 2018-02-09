@@ -4,6 +4,8 @@ import requireAuth from "../hoc/requireAuth";
 import { fetchGroups } from "../../actions/groups.js";
 
 import OnlineUsers from "../partials/OnlineUsers";
+import SearchBar from "../partials/SearchBar";
+import Card from "../partials/Card";
 
 class Home extends Component {
   componentWillMount() {
@@ -13,19 +15,19 @@ class Home extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-12" style={{ backgroundColor: "#ffffff" }}>
-            Search Bar
+          <div className="col-md-12">
+            <form>
+              <div className="form-group">
+                <SearchBar />
+              </div>
+            </form>
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-8" style={{ backgroundColor: "#000000" }}>
+          <div className="col-sm-8">
             <div className="row">
-              <div className="col-sm-6" style={{ backgroundColor: "#ffffff" }}>
-                col1
-              </div>
-              <div className="col-sm-6" style={{ backgroundColor: "#0000000" }}>
-                col2
-              </div>
+              <Card />
+              <Card />
             </div>
             <div className="row">
               <div className="col-sm-6" style={{ backgroundColor: "#000" }}>
@@ -44,7 +46,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="col-sm-4" style={{ backgroundColor: "#ffffff" }}>
+          <div className="col-sm-4">
             <div className="row">
               <OnlineUsers />
             </div>
