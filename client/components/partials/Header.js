@@ -10,9 +10,9 @@ class Header extends Component {
   checkAdmin() {
     if (this.props.user && this.props.user.type === "admin") {
       return (
-        <li>
-          <Link to="/admin">
-            <span className="glyphicon glyphicon-edit" /> Admin
+        <li className="nav-item">
+          <Link to="/admin" className="nav-link">
+            Admin <i className="fas fa-edit" />
           </Link>
         </li>
       );
@@ -59,49 +59,43 @@ class Header extends Component {
       );
     } else {
       return (
-        <div className="collapse navbar-collapse" id="myNavbar">
-          <ul className="nav navbar-nav navbar-right">
-            <li>
-              <Link to="/signup">
-                <span className="glyphicon glyphicon-user" /> Sign Up
-              </Link>
-            </li>
-            <li>
-              <Link to="/">
-                <span className="glyphicon glyphicon-log-in" /> Login
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="/signup">
+              Sign Up <i className="fa fa-user-plus" />
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Login <i className="fa fa-sign-in" />
+            </Link>
+          </li>
+        </ul>
       );
     }
   }
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          <nav className="navbar navbar-inverse navbar-static-top">
-            <div className="container-fluid">
-              <div className="navbar-header">
-                <button
-                  type="button"
-                  className="navbar-toggle"
-                  data-toggle="collapse"
-                  data-target="#myNavbar"
-                >
-                  <span className="icon-bar" />
-                  <span className="icon-bar" />
-                  <span className="icon-bar" />
-                </button>
-                <Link to="/home" className="navbar-brand">
-                  NFLevate
-                </Link>
-              </div>
-              {this.renderLinks()}
-            </div>
-          </nav>
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+        <Link className="navbar-brand" to="/home">
+          NFLevate
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#nflevateNav"
+          aria-controls="nflevateNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+
+        <div className="collapse navbar-collapse" id="nflevateNav">
+          {this.renderLinks()}
         </div>
-      </div>
+      </nav>
     );
   }
 }
