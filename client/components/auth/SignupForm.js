@@ -54,12 +54,12 @@ class SignupForm extends Component {
   render() {
     return (
       <div className="row vertical-offset-100">
-        <div className="col-md-4 col-md-offset-4">
-          <div className="panel panel-default box-shadow-panel">
-            <div className="panel-heading">
-              <h3 className="panel-title text-center">Please Sign up</h3>
+        <div className="col-md-6 col-md-offset-6 col-lg-4 col-lg-offset-4 mx-auto">
+          <div className="card box-shadow-panel form-padding">
+            <div className="card-header remove-border-bottom">
+              <h3 className="card-title text-center">Please Sign up</h3>
             </div>
-            <div className="panel-body">
+            <div className="card-block margin-top-10">
               <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
                 <Field
                   name="username"
