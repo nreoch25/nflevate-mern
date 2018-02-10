@@ -12,7 +12,7 @@ class Header extends Component {
       return (
         <li className="nav-item">
           <Link to="/admin" className="nav-link">
-            Admin <i className="fas fa-edit" />
+            Admin <i className="fa fa-edit" />
           </Link>
         </li>
       );
@@ -21,41 +21,53 @@ class Header extends Component {
   renderLinks() {
     if (this.props.authenticated === true) {
       return (
-        <div className="collapse navbar-collapse" id="myNavbar">
-          <ul className="nav navbar-nav navbar-right">
-            <li className="dropdown">
-              <a className="dropdown-toggle" data-toggle="dropdown" href="#">
-                <span className="glyphicon fa fa-bell nav-glyphicon" />
-                <b className="caret" />
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item dropdown">
+            <a
+              className="nav-link dropdown-toggle"
+              id="alertdropdown"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              href="#"
+            >
+              <i className="fa fa-bell" />
+            </a>
+            <div
+              className="dropdown-menu dropdown-menu-right"
+              aria-labelledby="alertdropdown"
+            >
+              <a className="dropdown-item" href="#">
+                Friend Requests
               </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a style={{ cursor: "pointer" }}>
-                    <span className="glyphicon glyphicon-user" /> Friend
-                    Requests
-                  </a>
-                </li>
-              </ul>
-            </li>
-            {this.checkAdmin()}
-            <li className="dropdown">
-              <a className="dropdown-toggle" data-toggle="dropdown" href="#">
-                {this.props.user.username}
-                <span className="caret" />
+            </div>
+          </li>
+          {this.checkAdmin()}
+          <li className="nav-item dropdown">
+            <a
+              className="nav-link dropdown-toggle"
+              id="userdropdown"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              href="#"
+            >
+              {this.props.user.username}
+            </a>
+            <div
+              className="dropdown-menu dropdown-menu-right"
+              aria-labelledby="userdropdown"
+            >
+              <a
+                className="dropdown-item"
+                href="#"
+                onClick={this.handleLogout.bind(this)}
+              >
+                Logout
               </a>
-              <ul className="dropdown-menu">
-                <li>
-                  <a
-                    style={{ cursor: "pointer" }}
-                    onClick={this.handleLogout.bind(this)}
-                  >
-                    <span className="glyphicon glyphicon-log-out" /> Logout
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+            </div>
+          </li>
+        </ul>
       );
     } else {
       return (
