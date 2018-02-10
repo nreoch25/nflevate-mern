@@ -38,3 +38,15 @@
 .no-padding-left {
   padding-left: 0;
 }
+
+.form-padding {
+  padding: 10px;
+}
+
+.remove-border-bottom {
+  border-bottom: none;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
