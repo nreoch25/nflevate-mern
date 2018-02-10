@@ -3,34 +3,21 @@ import React, { Component } from "react";
 class Card extends Component {
   render() {
     return (
-      <div className="col-sm-6 no-padding-left">
-        <div className="card">
-          <a
-            className="img-card"
-            href="http://www.fostrap.com/2016/03/bootstrap-3-carousel-fade-effect.html"
-          >
-            <img src="https://1.bp.blogspot.com/-Bii3S69BdjQ/VtdOpIi4aoI/AAAAAAAABlk/F0z23Yr59f0/s640/cover.jpg" />
+      <div className="card">
+        <img
+          className="card-img-top"
+          src="https://incomebully.com/wp-content/uploads/2015/08/show-me-the-money-286x180.jpg"
+          alt="Card image cap"
+        />
+        <div className="card-body">
+          <h5 className="card-title">Card title</h5>
+          <p className="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+          <a href="#" className="btn btn-primary">
+            Go somewhere
           </a>
-          <div className="card-content">
-            <h4 className="card-title">
-              <a href="http://www.fostrap.com/2016/03/bootstrap-3-carousel-fade-effect.html">
-                {" "}
-                Bootstrap 3 Carousel FadeIn Out Effect
-              </a>
-            </h4>
-            <p className="">
-              Tutorial to make a carousel bootstrap by adding more wonderful
-              effect fadein ...
-            </p>
-          </div>
-          <div className="card-read-more">
-            <a
-              href="http://www.fostrap.com/2016/03/bootstrap-3-carousel-fade-effect.html"
-              className="btn btn-link btn-block"
-            >
-              Read More
-            </a>
-          </div>
         </div>
       </div>
     );

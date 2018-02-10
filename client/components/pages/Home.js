@@ -26,8 +26,12 @@ class Home extends Component {
         <div className="row">
           <div className="col-sm-8">
             <div className="row">
-              <Card />
-              <Card />
+              <div className="col-sm-12 col-md-6 no-padding-left">
+                <Card />
+              </div>
+              <div className="col-sm-12 col-md-6 no-padding-left">
+                <Card />
+              </div>
             </div>
             <div className="row">
               <div className="col-sm-6" style={{ backgroundColor: "#000" }}>
