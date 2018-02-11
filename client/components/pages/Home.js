@@ -11,6 +11,45 @@ class Home extends Component {
   componentWillMount() {
     this.props.fetchGroups();
   }
+  renderGroups() {
+    if (this.props.groups.length > 0) {
+      // create an array for rows
+      let rowArray = [];
+      // create an array for elements within a row
+      let elementsArray = [];
+      this.props.groups.map((group, i, { length }) => {
+        elementsArray.push(
+          <div className="col-sm-12 col-md-6 no-padding-left">
+            <Card />
+          </div>
+        );
+        // create the row on even index so that
+        // both children can be attached to row using createElement
+        if (i % 2 !== 0) {
+          // create row and pass in two elements
+          let groupRow = React.createElement(
+            "div",
+            { className: "row margin-bottom-15" },
+            elementsArray
+          );
+          rowArray.push(groupRow);
+          // clear elements array for next row
+          elementsArray = [];
+        }
+        // if there is an even number of groups we need to
+        // check if if even number and last element and create row
+        if (i % 2 === 0 && i + 1 === length) {
+          let groupRow = React.createElement(
+            "div",
+            { className: "row" },
+            elementsArray
+          );
+          rowArray.push(groupRow);
+        }
+      });
+      return rowArray;
+    }
+  }
   render() {
     return (
       <div className="container">
@@ -24,32 +63,7 @@ class Home extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-8">
-            <div className="row">
-              <div className="col-sm-12 col-md-6 no-padding-left">
-                <Card />
-              </div>
-              <div className="col-sm-12 col-md-6 no-padding-left">
-                <Card />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-6" style={{ backgroundColor: "#000" }}>
-                col1
-              </div>
-              <div className="col-sm-6" style={{ backgroundColor: "#fff" }}>
-                col2
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-6" style={{ backgroundColor: "#fff" }}>
-                col1
-              </div>
-              <div className="col-sm-6" style={{ backgroundColor: "#000" }}>
-                col2
-              </div>
-            </div>
-          </div>
+          <div className="col-sm-8">{this.renderGroups()}</div>
           <div className="col-sm-4">
             <div className="row">
               <OnlineUsers />

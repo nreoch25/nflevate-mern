@@ -47,7 +47,9 @@ class AdminForm extends Component {
         <div className="col-md-6 col-md-offset-6 col-lg-4 col-lg-offset-4 mx-auto">
           <div className="card box-shadow-panel form-padding">
             <div className="card-header remove-border-bottom">
-              <h3 className="card-title text-center">Admin Form</h3>
+              <h3 className="card-title text-center margin-bottom-0">
+                Admin Form
+              </h3>
             </div>
             <div className="card-block margin-top-10">
               <form onSubmit={this.handleFormSubmit}>

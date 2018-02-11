@@ -88,7 +88,7 @@ class Header extends Component {
   }
   render() {
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark margin-bottom-15">
         <Link className="navbar-brand" to="/home">
           NFLevate
         </Link>
