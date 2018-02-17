@@ -17,3 +17,24 @@ export function fetchGroups() {
       });
   };
 }
+
+export function filterGroups(val) {
+  console.log("VAL", val);
+  return dispatch => {
+    axios
+      .get("http://localhost:8000/api/group")
+      .then(response => {
+        let filteredGroups = response.data.groups.filter(group =>
+          group.name.includes(val)
+        );
+        console.log(filteredGroups);
+        dispatch({
+          type: FETCH_GROUPS,
+          payload: filteredGroups
+        });
+      })
+      .catch(error => {
+        console.log("Request failed", error.response.data.error);
+      });
+  };
+}

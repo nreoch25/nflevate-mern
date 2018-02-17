@@ -26,6 +26,10 @@ module.exports = {
         }
       },
       {
+        test: /\.(jpe?g|gif|png|svg)$/i,
+        loader: "file-loader"
+      },
+      {
         test: /\.json$/,
         loader: "json-loader"
       }
@@ -37,7 +41,7 @@ module.exports = {
       include: path.join(__dirname, "./node_modules/")
     }),
     new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1,
+      maxChunks: 1
     })
   ]
 };

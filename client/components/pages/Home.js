@@ -14,7 +14,7 @@ class Home extends Component {
   renderGroups() {
     if (this.props.groups.length > 0) {
       const groups = this.props.groups;
-      const chunkSize = 2;
+      const chunkSize = 3;
       const chunked = [];
       let index = 0;
       while (index < groups.length) {
@@ -24,7 +24,7 @@ class Home extends Component {
       let groupsArray = chunked.map((chunk, i) => {
         let rowArray = chunk.map((group, i) => {
           return (
-            <div key={i} className="col-sm-12 col-md-6 no-padding-left">
+            <div key={i} className="col-sm-12 col-md-4 no-padding-left">
               <Card {...group} />
             </div>
           );

@@ -31,7 +31,6 @@ class OnlineUsers extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     onlineUsers: state.auth.onlineUsers
   };
