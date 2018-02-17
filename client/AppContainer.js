@@ -23,6 +23,7 @@ const App = () => (
             <Route exact path="/home" component={Routes.Home} />
             <Route exact path="/signup" component={Routes.Signup} />
             <Route exact path="/admin" component={Routes.Admin} />
+            <Route exact path="/group/:name" component={Routes.Group} />
             <Route component={Routes.PageNotFound} />
           </Switch>
         </div>

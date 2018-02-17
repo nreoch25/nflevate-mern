@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Card = props => {
   let groupImage = require(`../../../static/upload/${props.image}`);
@@ -7,9 +8,12 @@ const Card = props => {
       <img className="card-img-top" src={groupImage} alt="Card image cap" />
       <div className="card-body">
         <h5 className="card-title">{props.name}</h5>
-        <a href="#" className="btn btn-primary">
+        <Link
+          to={`/group/${props.name.replace(" ", "").toLowerCase()}`}
+          className="btn btn-primary"
+        >
           Enter Group
-        </a>
+        </Link>
       </div>
     </div>
   );
