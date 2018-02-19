@@ -5,6 +5,8 @@ import { Helmet } from "react-helmet";
 import Header from "./components/partials/Header";
 import Footer from "./components/partials/Footer";
 import * as Routes from "./Routes";
+import { fetchGroups } from "./actions/groups";
+import { currentUser } from "./actions/authentication";
 
 const App = () => (
   <div>
@@ -31,5 +33,10 @@ const App = () => (
     />
   </div>
 );
+
+App.loadData = [
+  ({ dispatch }) => dispatch(fetchGroups()),
+  ({ dispatch }) => dispatch(currentUser())
+];
 
 export default App;

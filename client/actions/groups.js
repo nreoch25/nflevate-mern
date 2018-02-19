@@ -3,6 +3,7 @@ import axios from "axios";
 export const FETCH_GROUPS = "FETCH_GROUPS";
 
 export function fetchGroups() {
+  console.log("HERE");
   return dispatch => {
     axios
       .get("http://localhost:8000/api/group")

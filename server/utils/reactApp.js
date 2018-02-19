@@ -10,6 +10,8 @@ import renderer from "./renderer";
 
 const reactApp = async (req, res, next) => {
   const store = configureStore();
+  // fetch data serverside
+  console.log(AppContainer.loadData);
   const context = {};
   const appWithRouter = (
     <Provider store={store}>
