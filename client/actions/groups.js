@@ -3,9 +3,8 @@ import axios from "axios";
 export const FETCH_GROUPS = "FETCH_GROUPS";
 
 export function fetchGroups() {
-  console.log("HERE");
   return dispatch => {
-    axios
+    return axios
       .get("http://localhost:8000/api/group")
       .then(response => {
         dispatch({
@@ -20,7 +19,6 @@ export function fetchGroups() {
 }
 
 export function filterGroups(val) {
-  console.log("VAL", val);
   return dispatch => {
     axios
       .get("http://localhost:8000/api/group")

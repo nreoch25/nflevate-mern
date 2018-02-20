@@ -3,7 +3,7 @@ import requireLogin from "../middleware/requireLogin";
 
 export default {
   setRouting: function(router) {
-    router.get("/api/group", requireLogin, this.getGroups);
+    router.get("/api/group", this.getGroups);
   },
   getGroups: function(req, res) {
     Group.find({}, (err, groups) => {
