@@ -26,9 +26,78 @@ class Group extends Component {
                 {this.getGroupName()}
               </div>
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">Cras justo odio</li>
-                <li className="list-group-item">Dapibus ac facilisis in</li>
-                <li className="list-group-item">Vestibulum at eros</li>
+                <li className="list-group-item">
+                  <img
+                    src={require("../../../static/images/default.png")}
+                    className="rounded-circle width-15-percent border border-primary float-left"
+                  />
+                  <div className="float-left width-85-percent">
+                    <div className="padding-left-10 padding-right-10">
+                      <h6 className="float-left">User Name</h6>
+                      <p className="float-right">12 hours ago</p>
+                    </div>
+                    <p className="padding-left-10 float-left">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </li>
+                <li className="list-group-item">
+                  <img
+                    src={require("../../../static/images/default.png")}
+                    className="rounded-circle width-15-percent border border-primary float-right"
+                  />
+                  <div className="float-right width-85-percent">
+                    <div className="padding-left-10 padding-right-10">
+                      <h6 className="float-right">User Name</h6>
+                      <p className="float-left">12 hours ago</p>
+                    </div>
+                    <p className="padding-right-10 float-right">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </li>
+                <li className="list-group-item">
+                  <img
+                    src={require("../../../static/images/default.png")}
+                    className="rounded-circle width-15-percent border border-primary float-left"
+                  />
+                  <div className="float-left width-85-percent">
+                    <div className="padding-left-10 padding-right-10">
+                      <h6 className="float-left">User Name</h6>
+                      <p className="float-right">12 hours ago</p>
+                    </div>
+                    <p className="padding-left-10 float-left">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </li>
+                <li className="list-group-item">
+                  <img
+                    src={require("../../../static/images/default.png")}
+                    className="rounded-circle width-15-percent border border-primary float-right"
+                  />
+                  <div className="float-right width-85-percent">
+                    <div className="padding-left-10 padding-right-10">
+                      <h6 className="float-right">User Name</h6>
+                      <p className="float-left">12 hours ago</p>
+                    </div>
+                    <p className="padding-right-10 float-right">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>

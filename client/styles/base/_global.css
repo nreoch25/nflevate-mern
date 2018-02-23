@@ -27,9 +27,6 @@
   color: #ffffff;
   background-color: #c62519;
 }
-.margin-top-15 {
-  margin-top: 15px;
-}
 .online {
   font-size: 10px;
   color: rgba(129, 191, 57, 0.95);
@@ -37,6 +34,12 @@
 }
 .no-padding-left {
   padding-left: 0;
+}
+.padding-left-10 {
+  padding-left: 10px;
+}
+.padding-right-10 {
+  padding-right: 10px;
 }
 
 .form-padding {
@@ -58,7 +61,27 @@
 .margin-bottom-15 {
   margin-bottom: 15px;
 }
+.margin-top-15 {
+  margin-top: 15px;
+}
+.margin-right-10 {
+  margin-right: 10px;
+}
+.margin-left-10 {
+  margin-right: 10px;
+}
 
 .width-100 {
   width: 100%;
+}
+
+.width-15-percent {
+  width: 15%;
+}
+.width-85-percent {
+  width: 85%;
+}
+
+.max-width-75 {
+  max-width: 75px;
 }
