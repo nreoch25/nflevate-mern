@@ -2,8 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import requireAuth from "../hoc/requireAuth";
 import OnlineUsers from "../partials/OnlineUsers";
+import SendChatMessage from "../partials/SendChatMessage";
 
 class Group extends Component {
+  componentDidMount() {
+    // TODO Join the room using socketIO
+  }
   getGroupName() {
     if (this.props.groups.length > 0) {
       const { name } = this.props.match.params;
@@ -17,14 +21,13 @@ class Group extends Component {
     }
   }
   render() {
+    let groupName = this.getGroupName();
     return (
       <div className="container">
         <div className="row">
           <div className="col-sm-8 no-padding-left">
             <div className="card">
-              <div className="card-header group-header">
-                {this.getGroupName()}
-              </div>
+              <div className="card-header group-header">{groupName}</div>
               <ul className="list-group list-group-flush line-height-75">
                 <li className="list-group-item">
                   <img
@@ -160,16 +163,7 @@ class Group extends Component {
             </div>
           </div>
         </div>
-        <footer className="chat-footer-send">
-          <div className="container">
-            <div className="input-group chat-message">
-              <input className="form-control chat-input" />
-              <span className="input-group-btn">
-                <button className="chat-btn">Send Message</button>
-              </span>
-            </div>
-          </div>
-        </footer>
+        <SendChatMessage />
       </div>
     );
   }

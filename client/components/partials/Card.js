@@ -9,7 +9,7 @@ const Card = props => {
       <div className="card-body">
         <h5 className="card-title">{props.name}</h5>
         <Link
-          to={`/group/${props.name.replace(" ", "").toLowerCase()}`}
+          to={`/group/${props.name.replace(/ /g, "").toLowerCase()}`}
           className="btn btn-primary"
         >
           Enter Group
