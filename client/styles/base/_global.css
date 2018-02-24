@@ -75,13 +75,24 @@
   width: 100%;
 }
 
-.width-15-percent {
-  width: 15%;
+.width-10-percent {
+  width: 10%;
 }
-.width-85-percent {
-  width: 85%;
+.width-90-percent {
+  width: 90%;
 }
 
 .max-width-75 {
   max-width: 75px;
+}
+
+.clear-both {
+  clear: both;
+}
+
+.line-height-75 {
+  line-height: 0.75;
+}
+.line-height-125 {
+  line-height: 1.25;
 }
