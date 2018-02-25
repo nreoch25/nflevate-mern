@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const FETCH_GROUPS = "FETCH_GROUPS";
+export const GROUP_USERS = "GROUP_USERS";
 
 export function fetchGroups() {
   return dispatch => {

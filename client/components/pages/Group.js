@@ -1,12 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import requireAuth from "../hoc/requireAuth";
-import OnlineUsers from "../partials/OnlineUsers";
+import GroupUsers from "../partials/GroupUsers";
 import SendChatMessage from "../partials/SendChatMessage";
+import GroupMessage from "../../sockets/GroupMessage";
 
 class Group extends Component {
+  constructor(props) {
+    super(props);
+    this.groupName = "";
+  }
   componentDidMount() {
-    // TODO Join the room using socketIO
+    // join user to group on backend
+    const params = { name: this.props.user.username, group: this.groupName };
+    GroupMessage.joinGroup(params);
   }
   getGroupName() {
     if (this.props.groups.length > 0) {
@@ -17,7 +24,8 @@ class Group extends Component {
           return true;
         }
       });
-      return groupName.name;
+      this.groupName = groupName.name;
+      return this.groupName;
     }
   }
   render() {
@@ -159,7 +167,7 @@ class Group extends Component {
           </div>
           <div className="col-sm-4">
             <div className="row">
-              <OnlineUsers />
+              <GroupUsers />
             </div>
           </div>
         </div>
@@ -171,7 +179,8 @@ class Group extends Component {
 
 function mapStateToProps(state) {
   return {
-    groups: state.groups.groups
+    groups: state.groups.groups,
+    user: state.auth.user
   };
 }
 

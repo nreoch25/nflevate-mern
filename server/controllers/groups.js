@@ -18,5 +18,20 @@ export default {
   // TODO post group message to mongo
   postGroupMessage: function(req, res) {
     console.log("POST GROUP MESSAGE", req.body);
+  },
+  joinGroup: function(name, group) {
+    return new Promise((resolve, reject) => {
+      Group.findOneAndUpdate(
+        { name: group },
+        { $push: { currentUsers: name } },
+        { new: true },
+        (error, document) => {
+          if (error) {
+            return reject(error.message);
+          }
+          resolve(document);
+        }
+      );
+    });
   }
 };
