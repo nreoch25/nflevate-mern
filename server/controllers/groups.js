@@ -21,15 +21,22 @@ export default {
   },
   joinGroup: function(name, group) {
     return new Promise((resolve, reject) => {
-      Group.findOneAndUpdate(
-        { name: group },
-        { $push: { currentUsers: name } },
-        { new: true },
-        (error, document) => {
-          if (error) {
-            return reject(error.message);
+      Group.findOne(
+        { $and: [{ name: group }, { currentUsers: name }] },
+        (error, doc) => {
+          if (!doc) {
+            Group.findOneAndUpdate(
+              { name: group },
+              { $push: { currentUsers: name } },
+              { new: true },
+              (error, document) => {
+                if (error) {
+                  return reject(error.message);
+                }
+                resolve(document);
+              }
+            );
           }
-          resolve(document);
         }
       );
     });
