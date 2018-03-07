@@ -40,5 +40,28 @@ export default {
         }
       );
     });
+  },
+  leaveGroup: function(name, group) {
+    return new Promise((resolve, reject) => {
+      Group.findOne(
+        { $and: [{ name: group }, { currentUsers: name }] },
+        (error, doc) => {
+          if (doc) {
+            console.log("CONTROLLER - REMOVE USER FROM GROUP", doc);
+            Group.findOneAndUpdate(
+              { name: group },
+              { $pull: { currentUsers: name } },
+              { new: true },
+              (error, document) => {
+                if (error) {
+                  return reject(error.message);
+                }
+                resolve(document);
+              }
+            );
+          }
+        }
+      );
+    });
   }
 };

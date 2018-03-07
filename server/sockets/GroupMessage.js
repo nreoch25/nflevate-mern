@@ -7,11 +7,18 @@ class GroupMessage {
       .then(document => {
         console.log("group joined", document);
         io.to(group).emit("groupUsers", document.currentUsers);
-        // TODO callback
+        callback();
       })
       .catch(error => {
         console.log(error);
       });
+  }
+  static leaveGroup({ name, group }, io, callback) {
+    groups.leaveGroup(name, group).then(document => {
+      console.log("group left", document);
+      io.to(group).emit("groupUsers", document.currentUsers);
+      callback();
+    });
   }
 }
 

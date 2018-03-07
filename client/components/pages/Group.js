@@ -9,11 +9,16 @@ class Group extends Component {
   constructor(props) {
     super(props);
     this.groupName = "";
+    this.params = {};
   }
   componentDidMount() {
     // join user to group on backend
-    const params = { name: this.props.user.username, group: this.groupName };
-    GroupMessage.joinGroup(params);
+    this.params = { name: this.props.user.username, group: this.groupName };
+    GroupMessage.joinGroup(this.params);
+  }
+  componentWillUnmount() {
+    console.log("Groups unmount");
+    GroupMessage.leaveGroup(this.params);
   }
   getGroupName() {
     if (this.props.groups.length > 0) {

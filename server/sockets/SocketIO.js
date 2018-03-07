@@ -22,6 +22,13 @@ class SocketIO {
         // need to add user to group in db
         GroupMessage.joinGroup(params, this.io, callback);
       });
+      // listen to remove a user from a chat group
+      socket.on("leave", (params, callback) => {
+        // remove the user from the socker channel for group messages
+        socket.leave(params.group);
+        // remove the user from the group in db
+        GroupMessage.leaveGroup(params, this.io, callback);
+      });
     });
   }
   static init(io) {
