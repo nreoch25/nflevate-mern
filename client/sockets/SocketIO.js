@@ -9,7 +9,6 @@ class SocketIO {
     if (this.onlineSet === false) {
       this.onlineSet = true;
       this.socket.on("online", users => {
-        console.log("CLIENT ONLINE USERS", users);
         this.dispatch({
           type: ONLINE_USERS,
           payload: users

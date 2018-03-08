@@ -9,6 +9,7 @@ class Group extends Component {
   constructor(props) {
     super(props);
     this.groupName = "";
+    this.currentUsers = [];
     this.params = {};
   }
   componentDidMount() {
@@ -30,6 +31,10 @@ class Group extends Component {
         }
       });
       this.groupName = groupName.name;
+      // Allows for currentUsers to be accessed from the
+      // server side rendering and load group currentUsers
+      // on initial load from the server side rendering
+      this.currentUsers = groupName.currentUsers;
       return this.groupName;
     }
   }
@@ -172,7 +177,7 @@ class Group extends Component {
           </div>
           <div className="col-sm-4">
             <div className="row">
-              <GroupUsers />
+              <GroupUsers currentUsers={this.currentUsers} />
             </div>
           </div>
         </div>

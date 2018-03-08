@@ -2,9 +2,25 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class GroupUsers extends Component {
+  constructor(props) {
+    super(props);
+    this.serverRender = true;
+  }
+  componentDidMount() {
+    this.serverRender = false;
+  }
   getGroupUsers() {
-    if (this.props.groupUsers.length > 0) {
-      return this.props.groupUsers.map((user, i) => {
+    let groupUsers;
+    // if server side rendering use the props being passed in
+    // else socket IO has been passed new users and that
+    // value is updated through the roducer
+    if (this.serverRender) {
+      groupUsers = this.props.currentUsers;
+    } else {
+      groupUsers = this.props.groupUsers;
+    }
+    if (groupUsers.length > 0) {
+      return groupUsers.map((user, i) => {
         return (
           <li key={i} className="list-group-item">
             <i className="fa fa-circle online" aria-hidden="true" />
@@ -15,6 +31,7 @@ class GroupUsers extends Component {
     }
   }
   render() {
+    console.log("CURRENT USERS", this.props.currentUsers);
     return (
       <div className="card width-100">
         <div className="card-header remove-border-bottom">

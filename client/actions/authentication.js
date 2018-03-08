@@ -71,7 +71,6 @@ export function currentUser() {
   return dispatch => {
     axios.post("http://localhost:8000/auth/user").then(response => {
       const user = response.data.user;
-      console.log("Current User", user);
       if (user) {
         // initiate socket.io only if user wasn't already authenticated
         // this is just to make sure we don't initiate multiple sockets
