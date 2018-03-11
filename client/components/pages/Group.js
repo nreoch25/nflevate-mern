@@ -181,7 +181,7 @@ class Group extends Component {
             </div>
           </div>
         </div>
-        <SendChatMessage />
+        <SendChatMessage user={this.props.user} group={this.groupName} />
       </div>
     );
   }

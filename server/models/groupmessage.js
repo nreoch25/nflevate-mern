@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const groupMessageSchema = Schema({
-  sender: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  sender: { type: String },
   body: { type: String },
-  group: { type: mongoose.Schema.Types.ObjectId, ref: "Group" },
+  group: { type: String },
   createdAt: { type: Date, default: Date.now() }
 });
 

@@ -20,6 +20,11 @@ class GroupMessage {
       callback();
     });
   }
+  static sendMessage({ name, group, body }, io, callback) {
+    groups.sendMessage(name, group, body).then(() => {
+      console.log("message saved in db");
+    });
+  }
 }
 
 export default GroupMessage;

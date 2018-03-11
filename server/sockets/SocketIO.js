@@ -29,6 +29,11 @@ class SocketIO {
         // remove the user from the group in db
         GroupMessage.leaveGroup(params, this.io, callback);
       });
+      // listen for incoming messages
+      socket.on("createMessage", (params, callback) => {
+        // send the message to the db
+        GroupMessage.sendMessage(params, this.io, callback);
+      });
     });
   }
   static init(io) {

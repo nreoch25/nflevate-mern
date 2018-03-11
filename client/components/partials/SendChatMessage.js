@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import GroupMessage from "../../sockets/GroupMessage";
 
 class SendChatMessage extends Component {
   constructor(props) {
@@ -8,12 +9,15 @@ class SendChatMessage extends Component {
     };
   }
   onMessageFormChange = evt => {
-    console.log(evt.target.value);
     this.setState({ chatMessage: evt.target.value });
   };
   onChatMessageSubmit = evt => {
     evt.preventDefault();
-    console.log("MESSAGE", this.state.chatMessage);
+    GroupMessage.sendMessage({
+      name: this.props.user.username,
+      group: this.props.group,
+      body: this.state.chatMessage
+    });
   };
   render() {
     return (

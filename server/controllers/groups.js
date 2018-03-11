@@ -5,7 +5,6 @@ import requireLogin from "../middleware/requireLogin";
 export default {
   setRouting: function(router) {
     router.get("/api/group", this.getGroups);
-    router.post("/api/group/message", this.postGroupMessage);
   },
   getGroups: function(req, res) {
     Group.find({}, (err, groups) => {
@@ -15,9 +14,16 @@ export default {
       return res.send({ groups });
     });
   },
-  // TODO post group message to mongo
-  postGroupMessage: function(req, res) {
-    console.log("POST GROUP MESSAGE", req.body);
+  sendMessage: function(name, group, body) {
+    return new Promise((resolve, reject) => {
+      const message = new GroupMessage();
+      message.sender = name;
+      message.group = group;
+      message.body = body;
+      message.save().then(() => {
+        console.log("MESSAGE SAVED");
+      });
+    });
   },
   joinGroup: function(name, group) {
     return new Promise((resolve, reject) => {

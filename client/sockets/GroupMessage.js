@@ -18,6 +18,19 @@ class GroupMessage extends SocketIO {
       console.log(`${name} has left the ${group} group`);
     });
   }
+  static sendMessage({ name, group, body }) {
+    this.socket.emit(
+      "createMessage",
+      {
+        name,
+        group,
+        body
+      },
+      () => {
+        console.log(`${name} has sent a new message to ${group} group`);
+      }
+    );
+  }
 }
 
 export default GroupMessage;
