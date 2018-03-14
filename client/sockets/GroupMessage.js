@@ -30,6 +30,9 @@ class GroupMessage extends SocketIO {
         console.log(`${name} has sent a new message to ${group} group`);
       }
     );
+    this.socket.on("groupMessages", groupMessages => {
+      console.log(groupMessages);
+    });
   }
 }
 

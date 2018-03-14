@@ -20,9 +20,20 @@ export default {
       message.sender = name;
       message.group = group;
       message.body = body;
-      message.save().then(() => {
-        console.log("MESSAGE SAVED");
-      });
+      message
+        .save()
+        .then(() => {
+          GroupMessage.find({ group: group })
+            .then(docs => {
+              resolve(docs);
+            })
+            .catch(err => {
+              reject(err);
+            });
+        })
+        .catch(err => {
+          reject(err);
+        });
     });
   },
   joinGroup: function(name, group) {

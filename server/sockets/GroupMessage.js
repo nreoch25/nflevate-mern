@@ -21,8 +21,9 @@ class GroupMessage {
     });
   }
   static sendMessage({ name, group, body }, io, callback) {
-    groups.sendMessage(name, group, body).then(() => {
-      console.log("message saved in db");
+    groups.sendMessage(name, group, body).then(groupMessages => {
+      io.to(group).emit("groupMessages", groupMessages);
+      callback();
     });
   }
 }
