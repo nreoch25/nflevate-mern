@@ -1,5 +1,5 @@
 import SocketIO from "./SocketIO";
-import { GROUP_USERS } from "../actions/groups";
+import { GROUP_USERS, GROUP_MESSAGES } from "../actions/groups";
 
 class GroupMessage extends SocketIO {
   static joinGroup({ name, group }) {
@@ -31,7 +31,10 @@ class GroupMessage extends SocketIO {
       }
     );
     this.socket.on("groupMessages", groupMessages => {
-      console.log(groupMessages);
+      this.dispatch({
+        type: GROUP_MESSAGES,
+        payload: groupMessages
+      });
     });
   }
 }

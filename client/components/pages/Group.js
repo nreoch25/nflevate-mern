@@ -38,6 +38,34 @@ class Group extends Component {
       return this.groupName;
     }
   }
+  displayChatMessages() {
+    console.log(this.props.groupMessages);
+    if (this.props.groupMessages.length > 0) {
+      return (
+        <ul className="list-group list-group-flush line-height-75">
+          {this.props.groupMessages.map((message, i) => {
+            return (
+              <li key={i} className="list-group-item">
+                <img
+                  src={require("../../../static/images/default.png")}
+                  className="rounded-circle width-10-percent border border-primary float-left"
+                />
+                <div className="float-left width-90-percent">
+                  <div className="padding-left-10 padding-right-10">
+                    <h6 className="float-left">{message.sender}</h6>
+                    <p className="float-right">{message.createdAt}</p>
+                  </div>
+                  <p className="padding-left-10 clear-both line-height-125">
+                    {message.body}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      );
+    }
+  }
   render() {
     let groupName = this.getGroupName();
     return (
@@ -46,132 +74,7 @@ class Group extends Component {
           <div className="col-sm-8 no-padding-left">
             <div className="card">
               <div className="card-header group-header">{groupName}</div>
-              <ul className="list-group list-group-flush line-height-75">
-                <li className="list-group-item">
-                  <img
-                    src={require("../../../static/images/default.png")}
-                    className="rounded-circle width-10-percent border border-primary float-left"
-                  />
-                  <div className="float-left width-90-percent">
-                    <div className="padding-left-10 padding-right-10">
-                      <h6 className="float-left">User Name</h6>
-                      <p className="float-right">12 hours ago</p>
-                    </div>
-                    <p className="padding-left-10 clear-both line-height-125">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <img
-                    src={require("../../../static/images/default.png")}
-                    className="rounded-circle width-10-percent border border-primary float-right"
-                  />
-                  <div className="float-right width-90-percent">
-                    <div className="padding-left-10 padding-right-10">
-                      <h6 className="float-right">User Name</h6>
-                      <p className="float-left">12 hours ago</p>
-                    </div>
-                    <p className="padding-right-10 clear-both line-height-125">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <img
-                    src={require("../../../static/images/default.png")}
-                    className="rounded-circle width-10-percent border border-primary float-left"
-                  />
-                  <div className="float-left width-90-percent">
-                    <div className="padding-left-10 padding-right-10">
-                      <h6 className="float-left">User Name</h6>
-                      <p className="float-right">12 hours ago</p>
-                    </div>
-                    <p className="padding-left-10 clear-both line-height-125">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <img
-                    src={require("../../../static/images/default.png")}
-                    className="rounded-circle width-10-percent border border-primary float-right"
-                  />
-                  <div className="float-right width-90-percent">
-                    <div className="padding-left-10 padding-right-10">
-                      <h6 className="float-right">User Name</h6>
-                      <p className="float-left">12 hours ago</p>
-                    </div>
-                    <p className="padding-right-10 clear-both line-height-125">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <img
-                    src={require("../../../static/images/default.png")}
-                    className="rounded-circle width-10-percent border border-primary float-left"
-                  />
-                  <div className="float-left width-90-percent">
-                    <div className="padding-left-10 padding-right-10">
-                      <h6 className="float-left">User Name</h6>
-                      <p className="float-right">12 hours ago</p>
-                    </div>
-                    <p className="padding-left-10 clear-both line-height-125">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <img
-                    src={require("../../../static/images/default.png")}
-                    className="rounded-circle width-10-percent border border-primary float-right"
-                  />
-                  <div className="float-right width-90-percent">
-                    <div className="padding-left-10 padding-right-10">
-                      <h6 className="float-right">User Name</h6>
-                      <p className="float-left">12 hours ago</p>
-                    </div>
-                    <p className="padding-right-10 clear-both line-height-125">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <img
-                    src={require("../../../static/images/default.png")}
-                    className="rounded-circle width-10-percent border border-primary float-left"
-                  />
-                  <div className="float-left width-90-percent">
-                    <div className="padding-left-10 padding-right-10">
-                      <h6 className="float-left">User Name</h6>
-                      <p className="float-right">12 hours ago</p>
-                    </div>
-                    <p className="padding-left-10 clear-both line-height-125">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <img
-                    src={require("../../../static/images/default.png")}
-                    className="rounded-circle width-10-percent border border-primary float-right"
-                  />
-                  <div className="float-right width-90-percent">
-                    <div className="padding-left-10 padding-right-10">
-                      <h6 className="float-right">User Name</h6>
-                      <p className="float-left">12 hours ago</p>
-                    </div>
-                    <p className="padding-right-10 clear-both line-height-125">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                  </div>
-                </li>
-              </ul>
+              {this.displayChatMessages()}
               <div className="chat-message-placeholder" />
             </div>
           </div>
@@ -190,6 +93,7 @@ class Group extends Component {
 function mapStateToProps(state) {
   return {
     groups: state.groups.groups,
+    groupMessages: state.groups.groupMessages,
     user: state.auth.user
   };
 }
