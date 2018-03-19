@@ -4,6 +4,7 @@ import requireAuth from "../hoc/requireAuth";
 import GroupUsers from "../partials/GroupUsers";
 import SendChatMessage from "../partials/SendChatMessage";
 import GroupMessage from "../../sockets/GroupMessage";
+import { fetchGroupMessages } from "../../actions/groups";
 
 class Group extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Group extends Component {
     // join user to group on backend
     this.params = { name: this.props.user.username, group: this.groupName };
     GroupMessage.joinGroup(this.params);
+    this.props.fetchGroupMessages(this.groupName);
   }
   componentWillUnmount() {
     console.log("Groups unmount");
@@ -41,6 +43,7 @@ class Group extends Component {
   displayChatMessages() {
     console.log(this.props.groupMessages);
     if (this.props.groupMessages.length > 0) {
+      console.log("HERE");
       return (
         <ul className="list-group list-group-flush line-height-75">
           {this.props.groupMessages.map((message, i) => {
@@ -98,4 +101,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default requireAuth(connect(mapStateToProps, null)(Group));
+export default requireAuth(
+  connect(mapStateToProps, { fetchGroupMessages })(Group)
+);

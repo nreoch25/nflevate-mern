@@ -5,6 +5,7 @@ import requireLogin from "../middleware/requireLogin";
 export default {
   setRouting: function(router) {
     router.get("/api/group", this.getGroups);
+    router.post("/api/group/messages", this.groupMessages);
   },
   getGroups: function(req, res) {
     Group.find({}, (err, groups) => {
@@ -12,6 +13,16 @@ export default {
         return res.status(422).send({ error: "Could not return groups" });
       }
       return res.send({ groups });
+    });
+  },
+  groupMessages: function(req, res) {
+    GroupMessage.find({ group: req.body.groupName }, (err, groupMessages) => {
+      if (err) {
+        return res
+          .status(422)
+          .send({ error: "Could not return group messages" });
+      }
+      return res.send({ groupMessages });
     });
   },
   sendMessage: function(name, group, body) {

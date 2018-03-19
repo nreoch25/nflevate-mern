@@ -20,6 +20,22 @@ export function fetchGroups() {
   };
 }
 
+export function fetchGroupMessages(groupName) {
+  return dispatch => {
+    return axios
+      .post("http://localhost:8000/api/group/messages", { groupName })
+      .then(response => {
+        dispatch({
+          type: GROUP_MESSAGES,
+          payload: response.data.groupMessages
+        });
+      })
+      .catch(error => {
+        console.log("Request failed", error.response.data.error);
+      });
+  };
+}
+
 export function filterGroups(val) {
   return dispatch => {
     axios
