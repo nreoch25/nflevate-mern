@@ -13,11 +13,16 @@ class SendChatMessage extends Component {
   };
   onChatMessageSubmit = evt => {
     evt.preventDefault();
-    GroupMessage.sendMessage({
-      name: this.props.user.username,
-      group: this.props.group,
-      body: this.state.chatMessage
-    });
+    GroupMessage.sendMessage(
+      {
+        name: this.props.user.username,
+        group: this.props.group,
+        body: this.state.chatMessage
+      },
+      () => {
+        this.chatMessage.value = "";
+      }
+    );
   };
   render() {
     return (
@@ -27,6 +32,9 @@ class SendChatMessage extends Component {
             <input
               onChange={this.onMessageFormChange}
               className="form-control chat-input"
+              ref={ref => {
+                this.chatMessage = ref;
+              }}
             />
             <span className="input-group-btn">
               <button onClick={this.onChatMessageSubmit} className="chat-btn">

@@ -20,7 +20,6 @@ class Group extends Component {
     this.props.fetchGroupMessages(this.groupName);
   }
   componentWillUnmount() {
-    console.log("Groups unmount");
     GroupMessage.leaveGroup(this.params);
   }
   getGroupName() {
@@ -41,9 +40,7 @@ class Group extends Component {
     }
   }
   displayChatMessages() {
-    console.log(this.props.groupMessages);
     if (this.props.groupMessages.length > 0) {
-      console.log("HERE");
       return (
         <ul className="list-group list-group-flush line-height-75">
           {this.props.groupMessages.map((message, i) => {

@@ -18,7 +18,7 @@ class GroupMessage extends SocketIO {
       console.log(`${name} has left the ${group} group`);
     });
   }
-  static sendMessage({ name, group, body }) {
+  static sendMessage({ name, group, body }, callback) {
     this.socket.emit(
       "createMessage",
       {
@@ -27,7 +27,7 @@ class GroupMessage extends SocketIO {
         body
       },
       () => {
-        console.log(`${name} has sent a new message to ${group} group`);
+        callback();
       }
     );
     this.socket.on("groupMessages", groupMessages => {
