@@ -1,12 +1,11 @@
 import {
   AUTHENTICATION_ERROR,
   AUTHENTICATE_USER,
-  UNAUTHENTICATE_USER,
-  ONLINE_USERS
+  UNAUTHENTICATE_USER
 } from "../actions/authentication";
 
 export default (
-  state = { authenticated: null, user: null, error: [], onlineUsers: [] },
+  state = { authenticated: null, user: null, error: [] },
   action
 ) => {
   switch (action.type) {
@@ -16,8 +15,6 @@ export default (
       return { ...state, authenticated: false, user: null, error: [] };
     case AUTHENTICATION_ERROR:
       return { ...state, error: action.payload };
-    case ONLINE_USERS:
-      return { ...state, onlineUsers: action.payload };
     default:
       return state;
   }
