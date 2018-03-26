@@ -13,6 +13,10 @@ class SocketIO {
     // initiate socketIO connection
     this.socket = io.connect();
     this.dispatch = dispatch;
+    // listen for OnlineUsers
+    this.socket.on("online", onlineUsers => {
+      console.log("ONLINE USERS CLIENT", onlineUsers);
+    });
   }
 }
 

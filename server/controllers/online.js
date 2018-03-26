@@ -3,13 +3,17 @@ import Online from "../models/online";
 export default {
   addOnlineUser: user => {
     return new Promise((resolve, reject) => {
-      const newOnline = new Online();
-      newOnline.username = user.username;
-      newOnline.save(error => {
-        if (error) {
-          return reject(error.message);
+      Online.findOne({ username: user.username }, (err, online) => {
+        if (!online) {
+          const newOnline = new Online();
+          newOnline.username = user.username;
+          newOnline.save(error => {
+            if (error) {
+              return reject(error.message);
+            }
+            resolve(newOnline);
+          });
         }
-        resolve(newOnline);
       });
     });
   },

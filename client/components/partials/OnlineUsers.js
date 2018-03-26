@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 class OnlineUsers extends Component {
   getOnlineUsers() {
+    console.log("ONLINE USERS", this.props);
     return (
       <li className="list-group-item">
         <i className="fa fa-circle online" aria-hidden="true" />
@@ -26,4 +27,11 @@ class OnlineUsers extends Component {
   }
 }
 
-export default OnlineUsers;
+function mapStateToProps(state) {
+  console.log(state);
+  return {
+    onlineUsers: state.auth.onlineUsers
+  };
+}
+
+export default connect(mapStateToProps, null)(OnlineUsers);

@@ -4,6 +4,7 @@ import SocketIO from "../sockets/SocketIO";
 export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
 export const UNAUTHENTICATE_USER = "UNAUTHENTICATE_USER";
 export const AUTHENTICATION_ERROR = "AUTHENTICATION_ERROR";
+export const ONLINE_USERS = "ONLINE_USERS";
 
 export function signupUser({ username, email, password }, history) {
   return dispatch => {
