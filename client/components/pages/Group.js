@@ -20,6 +20,7 @@ class Group extends Component {
     this.props.fetchGroupMessages(this.groupName);
   }
   componentWillUnmount() {
+    console.log("leave group", this.params);
     GroupMessage.leaveGroup(this.params);
   }
   getGroupName() {

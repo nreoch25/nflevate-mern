@@ -90,3 +90,19 @@ export function currentUser() {
     });
   };
 }
+
+export function fetchOnlineUsers(groupName) {
+  return dispatch => {
+    return axios
+      .get("http://localhost:8000/auth/users")
+      .then(response => {
+        dispatch({
+          type: ONLINE_USERS,
+          payload: response.data.onlineUsers
+        });
+      })
+      .catch(error => {
+        console.log("Request failed", error.response.data.error);
+      });
+  };
+}

@@ -1,4 +1,5 @@
 import io from "socket.io-client";
+import { ONLINE_USERS } from "../actions/authentication";
 
 class SocketIO {
   static check() {
@@ -15,7 +16,10 @@ class SocketIO {
     this.dispatch = dispatch;
     // listen for OnlineUsers
     this.socket.on("online", onlineUsers => {
-      console.log("ONLINE USERS CLIENT", onlineUsers);
+      this.dispatch({
+        type: ONLINE_USERS,
+        payload: onlineUsers
+      });
     });
   }
 }

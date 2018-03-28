@@ -1,10 +1,12 @@
 import passport from "passport";
 import userValidation from "../middleware/userValidation";
+import Online from "../models/online";
 
 export default {
   setRouting: function(router) {
     router.get("/auth/google", this.getGoogleLogin);
     router.get("/auth/google/callback", this.getGoogleCallback);
+    router.get("/auth/users", this.getUsers);
     router.post("/auth/logout", this.userLogout);
     router.post("/auth/user", this.currentUser);
     router.post(
@@ -72,5 +74,10 @@ export default {
       return res.send({ user: false });
     }
     res.send({ user: { username: req.user.username, type: req.user.type } });
+  },
+  getUsers: function(req, res) {
+    Online.find({})
+      .then(response => res.send({ onlineUsers: response }))
+      .catch(error => res.status(422).send({ error: error }));
   }
 };

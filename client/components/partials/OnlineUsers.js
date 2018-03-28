@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { fetchOnlineUsers } from "../../actions/authentication";
 
 class OnlineUsers extends Component {
+  componentDidMount() {
+    this.props.fetchOnlineUsers();
+  }
   getOnlineUsers() {
-    console.log("ONLINE USERS", this.props);
-    return (
-      <li className="list-group-item">
-        <i className="fa fa-circle online" aria-hidden="true" />
-        Online Users Here
-      </li>
-    );
+    if (this.props.onlineUsers.length > 0) {
+      return this.props.onlineUsers.map(user => {
+        return (
+          <li key={user._id} className="list-group-item">
+            <i className="fa fa-circle online" aria-hidden="true" />
+            {user.username}
+          </li>
+        );
+      });
+    }
   }
   render() {
     return (
@@ -28,10 +35,9 @@ class OnlineUsers extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     onlineUsers: state.auth.onlineUsers
   };
 }
 
-export default connect(mapStateToProps, null)(OnlineUsers);
+export default connect(mapStateToProps, { fetchOnlineUsers })(OnlineUsers);
