@@ -22,6 +22,7 @@ const App = () => (
             <Route exact path="/" component={Routes.Index} />
             <Route exact path="/home" component={Routes.Home} />
             <Route exact path="/signup" component={Routes.Signup} />
+            <Route exact path="/logout" component={Routes.Logout} />
             <Route exact path="/admin" component={Routes.Admin} />
             <Route exact path="/group/:name" component={Routes.Group} />
             <Route component={Routes.PageNotFound} />

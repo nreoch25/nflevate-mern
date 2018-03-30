@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import { logoutUser } from "../../actions/authentication";
 
 class Header extends Component {
-  handleLogout() {
-    this.props.logoutUser(this.props.history);
-  }
   checkAdmin() {
     if (this.props.user && this.props.user.type === "admin") {
       return (
@@ -58,13 +54,9 @@ class Header extends Component {
               className="dropdown-menu dropdown-menu-right"
               aria-labelledby="userdropdown"
             >
-              <a
-                className="dropdown-item"
-                href="#"
-                onClick={this.handleLogout.bind(this)}
-              >
+              <Link to="/logout" className="dropdown-item">
                 Logout
-              </a>
+              </Link>
             </div>
           </li>
         </ul>
@@ -119,4 +111,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { logoutUser })(Header));
+export default connect(mapStateToProps, null)(Header);
