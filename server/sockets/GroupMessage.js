@@ -26,6 +26,11 @@ class GroupMessage {
       callback();
     });
   }
+  static removeFromGroup(socket, io) {
+    groups.removeFromGroup(socket.request.user.username).then(document => {
+      io.to(document.name).emit("groupUsers", document.currentUsers);
+    });
+  }
 }
 
 export default GroupMessage;

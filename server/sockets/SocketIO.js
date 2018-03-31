@@ -14,6 +14,8 @@ class SocketIO {
         console.log("user disconnected");
         // remove online user
         OnlineUsers.removeOnlineUser(socket, this.io);
+        // remove user from groups if needed
+        GroupMessage.removeFromGroup(socket, this.io);
       });
       // listen to join a user to a group chat
       socket.on("join", (params, callback) => {

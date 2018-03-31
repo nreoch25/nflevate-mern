@@ -91,5 +91,24 @@ export default {
         }
       );
     });
+  },
+  removeFromGroup(user) {
+    return new Promise((resolve, reject) => {
+      Group.findOne({ currentUsers: user })
+        .then(document => {
+          Group.findOneAndUpdate(
+            { name: document.name },
+            { $pull: { currentUsers: user } },
+            { new: true },
+            (error, document) => {
+              if (error) {
+                return reject(error.message);
+              }
+              resolve(document);
+            }
+          );
+        })
+        .catch(error => reject(error));
+    });
   }
 };
