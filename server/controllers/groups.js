@@ -31,6 +31,7 @@ export default {
       message.sender = name;
       message.group = group;
       message.body = body;
+      message.createdAt = Date.now();
       message
         .save()
         .then(() => {
@@ -75,7 +76,6 @@ export default {
         { $and: [{ name: group }, { currentUsers: name }] },
         (error, doc) => {
           if (doc) {
-            console.log("CONTROLLER - REMOVE USER FROM GROUP", doc);
             Group.findOneAndUpdate(
               { name: group },
               { $pull: { currentUsers: name } },
@@ -96,17 +96,19 @@ export default {
     return new Promise((resolve, reject) => {
       Group.findOne({ currentUsers: user })
         .then(document => {
-          Group.findOneAndUpdate(
-            { name: document.name },
-            { $pull: { currentUsers: user } },
-            { new: true },
-            (error, document) => {
-              if (error) {
-                return reject(error.message);
+          if (document) {
+            Group.findOneAndUpdate(
+              { name: document.name },
+              { $pull: { currentUsers: user } },
+              { new: true },
+              (error, document) => {
+                if (error) {
+                  return reject(error.message);
+                }
+                resolve(document);
               }
-              resolve(document);
-            }
-          );
+            );
+          }
         })
         .catch(error => reject(error));
     });

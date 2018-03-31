@@ -44,7 +44,6 @@ export function filterGroups(val) {
         let filteredGroups = response.data.groups.filter(group =>
           group.name.includes(val)
         );
-        console.log(filteredGroups);
         dispatch({
           type: FETCH_GROUPS,
           payload: filteredGroups

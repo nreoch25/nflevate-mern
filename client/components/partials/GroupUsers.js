@@ -31,7 +31,6 @@ class GroupUsers extends Component {
     }
   }
   render() {
-    console.log("CURRENT USERS", this.props.currentUsers);
     return (
       <div className="card width-100">
         <div className="card-header remove-border-bottom">

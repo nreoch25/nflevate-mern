@@ -5,7 +5,6 @@ class GroupMessage {
     groups
       .joinGroup(name, group)
       .then(document => {
-        console.log("group joined", document);
         io.to(group).emit("groupUsers", document.currentUsers);
         callback();
       })
@@ -15,7 +14,6 @@ class GroupMessage {
   }
   static leaveGroup({ name, group }, io, callback) {
     groups.leaveGroup(name, group).then(document => {
-      console.log("group left", document);
       io.to(group).emit("groupUsers", document.currentUsers);
       callback();
     });

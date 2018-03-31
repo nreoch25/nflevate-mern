@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 import requireAuth from "../hoc/requireAuth";
 import GroupUsers from "../partials/GroupUsers";
 import SendChatMessage from "../partials/SendChatMessage";
 import GroupMessage from "../../sockets/GroupMessage";
 import { fetchGroupMessages } from "../../actions/groups";
+import ChatMessage from "../partials/ChatMessage";
 
 class Group extends Component {
   constructor(props) {
@@ -20,7 +22,6 @@ class Group extends Component {
     this.props.fetchGroupMessages(this.groupName);
   }
   componentWillUnmount() {
-    console.log("leave group", this.params);
     GroupMessage.leaveGroup(this.params);
   }
   getGroupName() {
@@ -45,23 +46,7 @@ class Group extends Component {
       return (
         <ul className="list-group list-group-flush line-height-75">
           {this.props.groupMessages.map((message, i) => {
-            return (
-              <li key={i} className="list-group-item">
-                <img
-                  src={require("../../../static/images/default.png")}
-                  className="rounded-circle width-10-percent border border-primary float-left"
-                />
-                <div className="float-left width-90-percent">
-                  <div className="padding-left-10 padding-right-10">
-                    <h6 className="float-left">{message.sender}</h6>
-                    <p className="float-right">{message.createdAt}</p>
-                  </div>
-                  <p className="padding-left-10 clear-both line-height-125">
-                    {message.body}
-                  </p>
-                </div>
-              </li>
-            );
+            return <ChatMessage key={i} {...message} />;
           })}
         </ul>
       );
