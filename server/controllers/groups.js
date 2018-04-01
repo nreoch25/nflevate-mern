@@ -1,6 +1,5 @@
 import Group from "../models/group";
 import GroupMessage from "../models/groupmessage";
-import requireLogin from "../middleware/requireLogin";
 
 export default {
   setRouting: function(router) {

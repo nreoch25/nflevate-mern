@@ -1,0 +1,6 @@
+.toggle-profile {
+  cursor: pointer;
+}
+.toggle-profile:hover {
+  color: #0062cc;
+}

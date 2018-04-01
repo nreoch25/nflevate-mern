@@ -19,6 +19,7 @@ import reactApp from "./utils/reactApp";
 import users from "./controllers/users";
 import admin from "./controllers/admin";
 import groups from "./controllers/groups";
+import profile from "./controllers/profile";
 // SocketIO class
 import SocketIO from "./sockets/SocketIO";
 // import connect mongo
@@ -82,6 +83,7 @@ const router = express.Router();
 users.setRouting(router);
 admin.setRouting(router);
 groups.setRouting(router);
+profile.setRouting(router);
 
 app.use(router);
 

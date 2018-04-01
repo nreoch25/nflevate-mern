@@ -27,7 +27,9 @@ const userSchema = Schema({
       friendName: { type: String, default: "" }
     }
   ],
-  totalRequests: { type: Number, default: 0 }
+  totalRequests: { type: Number, default: 0 },
+  favouriteTeam: { type: String, default: "No favourite team specified" },
+  favouritePlayer: { type: String, default: "No favourite player specified" }
 });
 
 userSchema.methods.encryptPassword = function(password) {
