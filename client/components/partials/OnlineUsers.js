@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchOnlineUsers } from "../../actions/authentication";
 
 class OnlineUsers extends Component {
@@ -11,8 +12,10 @@ class OnlineUsers extends Component {
       return this.props.onlineUsers.map(user => {
         return (
           <li key={user._id} className="list-group-item">
-            <i className="fa fa-circle online" aria-hidden="true" />
-            {user.username}
+            <Link className="remove-underline" to={`/profile/${user.username}`}>
+              <i className="fa fa-circle online" aria-hidden="true" />
+              {user.username}
+            </Link>
           </li>
         );
       });

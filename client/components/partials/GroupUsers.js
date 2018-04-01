@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class GroupUsers extends Component {
   constructor(props) {
@@ -23,8 +24,10 @@ class GroupUsers extends Component {
       return groupUsers.map((user, i) => {
         return (
           <li key={i} className="list-group-item">
-            <i className="fa fa-circle online" aria-hidden="true" />
-            {user}
+            <Link className="remove-underline" to={`/profile/${user}`}>
+              <i className="fa fa-circle online" aria-hidden="true" />
+              {user}
+            </Link>
           </li>
         );
       });

@@ -96,3 +96,7 @@
 .line-height-125 {
   line-height: 1.25;
 }
+
+.remove-underline:hover {
+  text-decoration: none;
+}

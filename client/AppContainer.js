@@ -25,6 +25,7 @@ const App = () => (
             <Route exact path="/logout" component={Routes.Logout} />
             <Route exact path="/admin" component={Routes.Admin} />
             <Route exact path="/group/:name" component={Routes.Group} />
+            <Route exact path="/profile/:user" component={Routes.Profile} />
             <Route component={Routes.PageNotFound} />
           </Switch>
         </div>

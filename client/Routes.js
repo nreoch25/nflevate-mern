@@ -6,6 +6,7 @@ export const Signup = loadable(() => import("./components/pages/Signup"));
 export const Logout = loadable(() => import("./components/auth/Logout"));
 export const Admin = loadable(() => import("./components/pages/Admin"));
 export const Group = loadable(() => import("./components/pages/Group"));
+export const Profile = loadable(() => import("./components/pages/Profile"));
 export const PageNotFound = loadable(() =>
   import("./components/pages/PageNotFound")
 );
