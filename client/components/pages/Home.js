@@ -9,7 +9,7 @@ import Card from "../partials/Card";
 
 class Home extends Component {
   componentWillMount() {
-    this.props.fetchGroups();
+    this.props.fetchGroups("");
   }
   renderGroups() {
     if (this.props.groups.length > 0) {

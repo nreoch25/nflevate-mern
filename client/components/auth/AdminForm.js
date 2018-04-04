@@ -29,7 +29,7 @@ class AdminForm extends Component {
     const data = new FormData();
     data.append("groupName", this.groupName.value);
     data.append("image", this.fileUpload.files[0]);
-    fetch("http://localhost:8000/api/group", {
+    fetch("/api/group", {
       method: "POST",
       body: data,
       credentials: "include"

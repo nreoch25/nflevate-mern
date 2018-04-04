@@ -1,6 +1,5 @@
 import axios from "axios";
 import SocketIO from "../sockets/SocketIO";
-import config from "../../server/config";
 
 export const AUTHENTICATE_USER = "AUTHENTICATE_USER";
 export const UNAUTHENTICATE_USER = "UNAUTHENTICATE_USER";
@@ -10,7 +9,7 @@ export const ONLINE_USERS = "ONLINE_USERS";
 export function signupUser({ username, email, password }, history) {
   return dispatch => {
     axios
-      .post(`${config.API_HOST}/auth/signup`, { username, email, password })
+      .post("/auth/signup", { username, email, password })
       .then(response => {
         console.log("Successful Signup", response.data.user);
 
@@ -30,7 +29,7 @@ export function signupUser({ username, email, password }, history) {
 export function loginUser({ email, password }, history) {
   return dispatch => {
     axios
-      .post(`${config.API_HOST}/auth/login`, { email, password })
+      .post("/auth/login", { email, password })
       .then(response => {
         console.log("Successful Login", response.data.user);
 
@@ -49,7 +48,7 @@ export function loginUser({ email, password }, history) {
 
 export function logoutUser(history) {
   return dispatch => {
-    axios.post(`${config.API_HOST}/auth/logout`).then(() => {
+    axios.post("/auth/logout").then(() => {
       // disconnect socketIO
       SocketIO.disconnect();
 
@@ -71,7 +70,7 @@ export function authError(error) {
 export function currentUser() {
   console.log("GET CURRENT USER - authentication actions");
   return dispatch => {
-    axios.post(`${config.API_HOST}/auth/user`).then(response => {
+    axios.post("/auth/user").then(response => {
       const user = response.data.user;
       if (user) {
         console.log("USER - authentication actions", user);
@@ -97,7 +96,7 @@ export function currentUser() {
 export function fetchOnlineUsers(groupName) {
   return dispatch => {
     return axios
-      .get(`${config.API_HOST}/auth/users`)
+      .get("/auth/users")
       .then(response => {
         dispatch({
           type: ONLINE_USERS,
