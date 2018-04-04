@@ -6,6 +6,7 @@ import { currentUser } from "../../actions/authentication";
 export default WrappedComponent => {
   class RequireAuth extends Component {
     componentWillMount() {
+      console.log("REQUIRE AUTH HOC - COMPONENT WILL MOUNT");
       this.props.currentUser();
     }
     render() {

@@ -1,11 +1,12 @@
 import axios from "axios";
+import config from "../../server/config";
 
 export const FETCH_PROFILE = "FETCH_PROFILE";
 
 export function fetchProfile(user) {
   return dispatch => {
     return axios
-      .get(`http://localhost:8000/api/profile/${user}`)
+      .get(`${config.API_HOST}/api/profile/${user}`)
       .then(response => {
         dispatch({
           type: FETCH_PROFILE,

@@ -13,4 +13,4 @@ RUN yarn install --pure-lockfile
 COPY . /usr/src/app
 
 EXPOSE 8000
-CMD ["npm", "run", "bs"]
+CMD ["yarn", "bs"]

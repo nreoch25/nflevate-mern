@@ -3,6 +3,7 @@ import GroupMessage from "./GroupMessage";
 
 class SocketIO {
   static connection() {
+    console.log("SocketIO connection function called");
     // initialize globalRoom instance
     // initialize Global class
     this.io.on("connection", socket => {
@@ -39,6 +40,7 @@ class SocketIO {
     });
   }
   static init(io) {
+    console.log("SOCKET IO.init - socket io server");
     // store io in a class property
     this.io = io;
     // initialize socketIO connection listener
