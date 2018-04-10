@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchProfile } from "../../actions/profile";
 import requireAuth from "../hoc/requireAuth";
 import ProfileInformation from "../partials/profile/ProfileInformation";
@@ -26,7 +27,7 @@ class Profile extends Component {
     let mode = this.state.mode === "display" ? "update" : "display";
     this.setState({ mode });
   };
-  renderProfileLinks() {
+  renderProfileLinks({ username }) {
     if (this.props.user.username === this.props.match.params.user) {
       return (
         <ul className="list-group list-group-flush">
@@ -42,12 +43,18 @@ class Profile extends Component {
       return (
         <ul className="list-group list-group-flush">
           <li className="list-group-item">Send Friend Request</li>
-          <li className="list-group-item">Send Private Message</li>
+          <Link
+            className="remove-underline"
+            to={`/private/${this.props.user.username}/${username}`}
+          >
+            <li className="list-group-item">Send Private Message</li>
+          </Link>
         </ul>
       );
     }
   }
   render() {
+    console.log("PROPS", this.props);
     const profileInfo = {
       username: this.props.match.params.user,
       favouriteTeam: this.props.profile.favouriteTeam,
@@ -65,7 +72,7 @@ class Profile extends Component {
                 className="width-100"
                 src={require("../../../static/images/profile.jpeg")}
               />
-              {this.renderProfileLinks()}
+              {this.renderProfileLinks(profileInfo)}
             </div>
           </div>
           <div className="col-sm-8 no-padding-left">

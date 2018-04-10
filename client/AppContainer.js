@@ -26,6 +26,11 @@ const App = () => (
             <Route exact path="/admin" component={Routes.Admin} />
             <Route exact path="/group/:name" component={Routes.Group} />
             <Route exact path="/profile/:user" component={Routes.Profile} />
+            <Route
+              exact
+              path="/private/:sender/:receiver"
+              component={Routes.PrivateChat}
+            />
             <Route component={Routes.PageNotFound} />
           </Switch>
         </div>
