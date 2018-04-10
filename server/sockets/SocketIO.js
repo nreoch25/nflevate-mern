@@ -1,5 +1,6 @@
 import OnlineUsers from "./OnlineUsers";
 import GroupMessage from "./GroupMessage";
+import PrivateMessage from "./PrivateMessage";
 
 class SocketIO {
   static connection() {
@@ -19,14 +20,14 @@ class SocketIO {
         GroupMessage.removeFromGroup(socket, this.io);
       });
       // listen to join a user to a group chat
-      socket.on("join", (params, callback) => {
+      socket.on("joinGroup", (params, callback) => {
         // join the user to the socket channel for group messages
         socket.join(params.group);
         // need to add user to group in db
         GroupMessage.joinGroup(params, this.io, callback);
       });
       // listen to remove a user from a chat group
-      socket.on("leave", (params, callback) => {
+      socket.on("leaveGroup", (params, callback) => {
         // remove the user from the socker channel for group messages
         socket.leave(params.group);
         // remove the user from the group in db
@@ -36,6 +37,10 @@ class SocketIO {
       socket.on("createMessage", (params, callback) => {
         // send the message to the db
         GroupMessage.sendMessage(params, this.io, callback);
+      });
+      socket.on("createPrivateMessage", (params, callback) => {
+        // send private message to the db
+        PrivateMessage.sendMessage(params, this.io, callback);
       });
     });
   }

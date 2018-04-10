@@ -3,7 +3,7 @@ import { GROUP_USERS, GROUP_MESSAGES } from "../actions/groups";
 
 class GroupMessage extends SocketIO {
   static joinGroup({ name, group }) {
-    this.socket.emit("join", { name, group }, () => {
+    this.socket.emit("joinGroup", { name, group }, () => {
       console.log(`${name} has joined the ${group} group`);
     });
     this.socket.on("groupUsers", users => {
@@ -14,7 +14,7 @@ class GroupMessage extends SocketIO {
     });
   }
   static leaveGroup({ name, group }) {
-    this.socket.emit("leave", { name, group }, () => {
+    this.socket.emit("leaveGroup", { name, group }, () => {
       console.log(`${name} has left the ${group} group`);
     });
   }
