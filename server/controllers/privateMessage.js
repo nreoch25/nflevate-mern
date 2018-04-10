@@ -11,11 +11,21 @@ export default {
       privateMessage
         .save()
         .then(doc => {
-          console.log(doc);
-          resolve(doc);
+          PrivateMessage.find({
+            $and: [
+              { $or: [{ sender: sender }, { sender: receiver }] },
+              { $or: [{ receiver: sender }, { receiver: receiver }] }
+            ]
+          })
+            .then(doc => {
+              return resolve(doc);
+            })
+            .catch(error => {
+              return reject(error);
+            });
         })
         .catch(err => {
-          reject(err);
+          return reject(err);
         });
     });
   }

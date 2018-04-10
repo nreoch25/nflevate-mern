@@ -1,8 +1,24 @@
 import React, { Component } from "react";
 import SendPrivateMessage from "../partials/SendPrivateMessage";
+import PrivateMessage from "../../sockets/PrivateMessage";
 import requireAuth from "../hoc/requireAuth";
 
 class PrivateChat extends Component {
+  constructor(props) {
+    super(props);
+    this.params = {};
+  }
+  componentDidMount() {
+    // join user to group on backend
+    this.params = {
+      sender: this.props.match.params.sender,
+      receiver: this.props.match.params.receiver
+    };
+    PrivateMessage.joinPrivateChat(this.params);
+  }
+  componentWillUnmount() {
+    PrivateMessage.leavePrivateChat(this.params);
+  }
   render() {
     const userObject = {
       sender: this.props.match.params.sender,

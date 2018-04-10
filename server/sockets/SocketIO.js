@@ -33,6 +33,17 @@ class SocketIO {
         // remove the user from the group in db
         GroupMessage.leaveGroup(params, this.io, callback);
       });
+      // listen to join a user to a private chat
+      socket.on("joinPM", params => {
+        // need to join both users as senders and receivers
+        socket.join(`${params.sender} ${params.receiver}`);
+        socket.join(`${params.receiver} ${params.sender}`);
+      });
+      // listen to remove a user from a private chat
+      socket.on("leavePM", params => {
+        socket.leave(`${params.sender} ${params.receiver}`);
+        socket.leave(`${params.receiver} ${params.sender}`);
+      });
       // listen for incoming messages
       socket.on("createMessage", (params, callback) => {
         // send the message to the db
