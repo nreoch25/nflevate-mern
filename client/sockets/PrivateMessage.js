@@ -1,9 +1,9 @@
 import SocketIO from "./SocketIO";
+import { FETCH_PRIVATE_MESSAGES } from "../actions/privateMessages";
 
 class PrivateMessage extends SocketIO {
   static joinPrivateChat({ sender, receiver }) {
     this.socket.emit("joinPM", { sender, receiver });
-    // TODO dispatch all the PMs for this sender/receiver when they join private chat
   }
   static leavePrivateChat({ sender, receiver }) {
     this.socket.emit("leavePM", { sender, receiver });
@@ -22,12 +22,10 @@ class PrivateMessage extends SocketIO {
       }
     );
     this.socket.on("privateMessages", privateMessages => {
-      console.log("PRIVATE MESSAGES RECEIVED", privateMessages);
-      // TODO dispatch the new private messages through redux
-      // this.dispatch({
-      //   type: GROUP_MESSAGES,
-      //   payload: groupMessages
-      // });
+      this.dispatch({
+        type: FETCH_PRIVATE_MESSAGES,
+        payload: privateMessages
+      });
     });
   }
 }

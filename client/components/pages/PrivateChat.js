@@ -4,6 +4,7 @@ import SendPrivateMessage from "../partials/SendPrivateMessage";
 import PrivateMessage from "../../sockets/PrivateMessage";
 import requireAuth from "../hoc/requireAuth";
 import { fetchPrivateMessages } from "../../actions/privateMessages";
+import ChatMessage from "../partials/ChatMessage";
 
 class PrivateChat extends Component {
   constructor(props) {
@@ -22,6 +23,17 @@ class PrivateChat extends Component {
   componentWillUnmount() {
     PrivateMessage.leavePrivateChat(this.params);
   }
+  displayPrivateMessages() {
+    if (this.props.privateMessages.length > 0) {
+      return (
+        <ul className="list-group list-group-flush line-height-75">
+          {this.props.privateMessages.map((message, i) => {
+            return <ChatMessage key={i} {...message} />;
+          })}
+        </ul>
+      );
+    }
+  }
   render() {
     console.log("PRIVATE MESSAGES", this.props.privateMessages);
     const userObject = {
@@ -36,6 +48,7 @@ class PrivateChat extends Component {
               <div className="card-header group-header">
                 Private Chat - {userObject.sender} and {userObject.receiver}{" "}
               </div>
+              {this.displayPrivateMessages()}
               <div className="chat-message-placeholder" />
             </div>
           </div>
