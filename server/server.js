@@ -20,6 +20,7 @@ import users from "./controllers/users";
 import admin from "./controllers/admin";
 import groups from "./controllers/groups";
 import profile from "./controllers/profile";
+import privateMessage from "./controllers/privateMessage";
 // SocketIO class
 import SocketIO from "./sockets/SocketIO";
 // import connect mongo
@@ -84,6 +85,7 @@ users.setRouting(router);
 admin.setRouting(router);
 groups.setRouting(router);
 profile.setRouting(router);
+privateMessage.setRouting(router);
 
 app.use(router);
 

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import SendPrivateMessage from "../partials/SendPrivateMessage";
 import PrivateMessage from "../../sockets/PrivateMessage";
 import requireAuth from "../hoc/requireAuth";
+import { fetchPrivateMessages } from "../../actions/privateMessages";
 
 class PrivateChat extends Component {
   constructor(props) {
@@ -15,11 +17,13 @@ class PrivateChat extends Component {
       receiver: this.props.match.params.receiver
     };
     PrivateMessage.joinPrivateChat(this.params);
+    this.props.fetchPrivateMessages(this.params);
   }
   componentWillUnmount() {
     PrivateMessage.leavePrivateChat(this.params);
   }
   render() {
+    console.log("PRIVATE MESSAGES", this.props.privateMessages);
     const userObject = {
       sender: this.props.match.params.sender,
       receiver: this.props.match.params.receiver
@@ -46,4 +50,13 @@ class PrivateChat extends Component {
   }
 }
 
-export default requireAuth(PrivateChat);
+function mapStateToProps(state) {
+  console.log("STATE", state);
+  return {
+    privateMessages: state.privateMessages.privateMessages
+  };
+}
+
+export default requireAuth(
+  connect(mapStateToProps, { fetchPrivateMessages })(PrivateChat)
+);
