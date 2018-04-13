@@ -27,6 +27,10 @@ class Profile extends Component {
     let mode = this.state.mode === "display" ? "update" : "display";
     this.setState({ mode });
   };
+  sendFriendRequest(username, friend) {
+    console.log("HERE");
+    console.log("SEND FRIEND REQUEST", username, friend);
+  }
   renderProfileLinks({ username }) {
     if (this.props.user.username === this.props.match.params.user) {
       return (
@@ -42,7 +46,16 @@ class Profile extends Component {
     } else {
       return (
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">Send Friend Request</li>
+          <li
+            onClick={this.sendFriendRequest.bind(
+              this,
+              this.props.user.username,
+              username
+            )}
+            className="list-group-item cursor-pointer"
+          >
+            Send Friend Request
+          </li>
           <Link
             className="remove-underline"
             to={`/private/${this.props.user.username}/${username}`}
