@@ -4,3 +4,11 @@
 .toggle-profile:hover {
   color: #0062cc;
 }
+
+.profile-link {
+  color: #007bff;
+}
+
+.profile-link:hover {
+  color: #0056b3;
+}

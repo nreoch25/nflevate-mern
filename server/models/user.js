@@ -10,23 +10,9 @@ const userSchema = Schema({
   type: { type: String, default: "user" },
   userImage: { type: String, default: "default.png" },
   google: { type: String, default: "" },
-  sentRequest: [
-    {
-      username: { type: String, default: "" }
-    }
-  ],
-  request: [
-    {
-      userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      username: { type: String, default: "" }
-    }
-  ],
-  friendsList: [
-    {
-      friendId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      friendName: { type: String, default: "" }
-    }
-  ],
+  sentRequests: [String],
+  requests: [String],
+  friendsList: [String],
   totalRequests: { type: Number, default: 0 },
   favouriteTeam: { type: String, default: "No favourite team specified" },
   favouritePlayer: { type: String, default: "No favourite player specified" }

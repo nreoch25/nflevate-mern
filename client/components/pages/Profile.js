@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProfile } from "../../actions/profile";
+import { fetchProfile, sendFriendRequest } from "../../actions/profile";
 import requireAuth from "../hoc/requireAuth";
 import ProfileInformation from "../partials/profile/ProfileInformation";
 import ProfileUpdate from "../partials/profile/ProfileUpdate";
@@ -30,6 +30,7 @@ class Profile extends Component {
   sendFriendRequest(username, friend) {
     console.log("HERE");
     console.log("SEND FRIEND REQUEST", username, friend);
+    this.props.sendFriendRequest(username, friend);
   }
   renderProfileLinks({ username }) {
     if (this.props.user.username === this.props.match.params.user) {
@@ -52,7 +53,7 @@ class Profile extends Component {
               this.props.user.username,
               username
             )}
-            className="list-group-item cursor-pointer"
+            className="list-group-item cursor-pointer profile-link"
           >
             Send Friend Request
           </li>
@@ -104,4 +105,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default requireAuth(connect(mapStateToProps, { fetchProfile })(Profile));
+export default requireAuth(
+  connect(mapStateToProps, { fetchProfile, sendFriendRequest })(Profile)
+);
