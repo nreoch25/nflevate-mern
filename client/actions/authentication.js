@@ -68,12 +68,10 @@ export function authError(error) {
 }
 
 export function currentUser() {
-  console.log("GET CURRENT USER - authentication actions");
   return dispatch => {
     axios.post("/auth/user").then(response => {
       const user = response.data.user;
       if (user) {
-        console.log("USER - authentication actions", user);
         // initiate socket.io only if user wasn't already authenticated
         // this is just to make sure we don't initiate multiple sockets
         if (SocketIO.check() === false) {

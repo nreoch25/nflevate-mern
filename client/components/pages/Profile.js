@@ -13,9 +13,6 @@ class Profile extends Component {
       mode: "display"
     };
   }
-  componentDidMount() {
-    this.props.fetchProfile(this.props.match.params.user);
-  }
   displayProfileContent(profileInfo) {
     if (this.state.mode === "display") {
       return <ProfileInformation {...profileInfo} />;
@@ -28,8 +25,6 @@ class Profile extends Component {
     this.setState({ mode });
   };
   sendFriendRequest(username, friend) {
-    console.log("HERE");
-    console.log("SEND FRIEND REQUEST", username, friend);
     this.props.sendFriendRequest(username, friend);
   }
   renderProfileLinks({ username }) {
@@ -68,7 +63,6 @@ class Profile extends Component {
     }
   }
   render() {
-    console.log("PROPS", this.props);
     const profileInfo = {
       username: this.props.match.params.user,
       favouriteTeam: this.props.profile.favouriteTeam,
@@ -106,5 +100,5 @@ function mapStateToProps(state) {
 }
 
 export default requireAuth(
-  connect(mapStateToProps, { fetchProfile, sendFriendRequest })(Profile)
+  connect(mapStateToProps, { sendFriendRequest })(Profile)
 );

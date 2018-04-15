@@ -7,6 +7,9 @@ export const Logout = loadable(() => import("./components/auth/Logout"));
 export const Admin = loadable(() => import("./components/pages/Admin"));
 export const Group = loadable(() => import("./components/pages/Group"));
 export const Profile = loadable(() => import("./components/pages/Profile"));
+export const FriendRequests = loadable(() =>
+  import("./components/pages/FriendRequests")
+);
 export const PrivateChat = loadable(() =>
   import("./components/pages/PrivateChat")
 );

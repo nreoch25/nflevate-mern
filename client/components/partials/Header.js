@@ -33,9 +33,16 @@ class Header extends Component {
               className="dropdown-menu dropdown-menu-right"
               aria-labelledby="alertdropdown"
             >
-              <a className="dropdown-item" href="#">
-                Friend Requests
-              </a>
+              <Link
+                to={`/requests/${this.props.user.username}`}
+                className="dropdown-item"
+                href="#"
+              >
+                Friend Requests{" "}
+                <span className="badge badge-primary">
+                  {this.props.user.totalRequests}
+                </span>
+              </Link>
             </div>
           </li>
           {this.checkAdmin()}
@@ -54,6 +61,12 @@ class Header extends Component {
               className="dropdown-menu dropdown-menu-right"
               aria-labelledby="userdropdown"
             >
+              <Link
+                to={`/profile/${this.props.user.username}`}
+                className="dropdown-item"
+              >
+                Your Profile
+              </Link>
               <Link to="/logout" className="dropdown-item">
                 Logout
               </Link>

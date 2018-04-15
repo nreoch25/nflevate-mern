@@ -25,7 +25,7 @@ export default {
               return next(err);
             }
             return res.send({
-              user: { username: req.user.username, type: req.user.type }
+              user: req.user
             });
           });
         })(req, res, next);
@@ -50,7 +50,7 @@ export default {
               return next(err);
             }
             return res.send({
-              user: { username: req.user.username, type: req.user.type }
+              user: req.user
             });
           });
         })(req, res, next);
@@ -73,7 +73,7 @@ export default {
     if (typeof req.user === "undefined") {
       return res.send({ user: false });
     }
-    res.send({ user: { username: req.user.username, type: req.user.type } });
+    res.send({ user: req.user });
   },
   getUsers: function(req, res) {
     Online.find({})

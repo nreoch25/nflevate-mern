@@ -64,7 +64,6 @@ class PrivateChat extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("STATE", state);
   return {
     privateMessages: state.privateMessages.privateMessages
   };
