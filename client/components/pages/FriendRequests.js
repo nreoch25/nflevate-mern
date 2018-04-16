@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import requireAuth from "../hoc/requireAuth";
 
 class FriendRequests extends Component {
   displayFriendRequests() {
@@ -13,7 +14,9 @@ class FriendRequests extends Component {
             />
             <div className="float-left width-90-percent">
               <div className="padding-left-10 padding-right-10">
-                <h6 className="float-left">{request}</h6>
+                <h6 className="float-left margin-right-10">{request}</h6>
+                <button type="button" className="btn btn-success margin-right-10">Accept</button>
+                <button type="button" className="btn btn-danger">Decline</button>
               </div>
             </div>
           </li>
@@ -50,4 +53,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(FriendRequests);
+export default requireAuth(connect(mapStateToProps, null)(FriendRequests));
