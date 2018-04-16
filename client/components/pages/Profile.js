@@ -13,6 +13,9 @@ class Profile extends Component {
       mode: "display"
     };
   }
+  componentDidMount() {
+    this.props.fetchProfile(this.props.match.params.user);
+  }
   displayProfileContent(profileInfo) {
     if (this.state.mode === "display") {
       return <ProfileInformation {...profileInfo} />;
@@ -62,7 +65,22 @@ class Profile extends Component {
       );
     }
   }
+  renderSentRequests() {
+    return (
+      <div className="card rounded-0 border-top-0">
+        <div className="card-header">Sent Friend Requests</div>
+        <ul className="list-group list-group-flush">
+          {this.props.user.sentRequests.map(sent => {
+            return (
+              <li className="list-group-item padding-left-2rem">{sent}</li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
   render() {
+    console.log("PROFILE", this.props.profile);
     const profileInfo = {
       username: this.props.match.params.user,
       favouriteTeam: this.props.profile.favouriteTeam,
@@ -81,6 +99,7 @@ class Profile extends Component {
                 src={require("../../../static/images/profile.jpeg")}
               />
               {this.renderProfileLinks(profileInfo)}
+              {this.renderSentRequests()}
             </div>
           </div>
           <div className="col-sm-8 no-padding-left">
@@ -100,5 +119,5 @@ function mapStateToProps(state) {
 }
 
 export default requireAuth(
-  connect(mapStateToProps, { sendFriendRequest })(Profile)
+  connect(mapStateToProps, { sendFriendRequest, fetchProfile })(Profile)
 );

@@ -14,7 +14,6 @@ export function fetchProfile(user) {
         });
       })
       .catch(error => {
-        console.log("HERE - FETCH PROFILE");
         console.log("Request failed", error.response.data.error);
       });
   };

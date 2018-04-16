@@ -4,10 +4,11 @@ import requireAuth from "../hoc/requireAuth";
 
 class FriendRequests extends Component {
   displayFriendRequests() {
+    console.log("USER", this.props.user);
     if (this.props.user.requests.length > 0) {
-      return this.props.user.requests.map(request => {
+      return this.props.user.requests.map((request, i) => {
         return (
-          <li className="list-group-item">
+          <li key={i} className="list-group-item">
             <img
               src={require("../../../static/images/default.png")}
               className="rounded-circle width-10-percent border border-primary float-left"
