@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProfile, sendFriendRequest } from "../../actions/profile";
+import {
+  fetchProfile,
+  sendFriendRequest,
+  cancelFriendRequest
+} from "../../actions/profile";
 import requireAuth from "../hoc/requireAuth";
 import ProfileInformation from "../partials/profile/ProfileInformation";
 import ProfileUpdate from "../partials/profile/ProfileUpdate";
@@ -65,14 +69,38 @@ class Profile extends Component {
       );
     }
   }
+  cancelFriendRequest(cancelUser) {
+    this.props.cancelFriendRequest(this.props.user.username, cancelUser);
+  }
   renderSentRequests() {
+    if (this.props.user.sentRequests.length === 0) {
+      return (
+        <div className="card rounded-0 border-top-0">
+          <div className="card-header">Sent Friend Requests</div>
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item padding-left-2rem disabled">
+              No Sent Friend Requests
+            </li>
+          </ul>
+        </div>
+      );
+    }
     return (
       <div className="card rounded-0 border-top-0">
         <div className="card-header">Sent Friend Requests</div>
         <ul className="list-group list-group-flush">
-          {this.props.user.sentRequests.map(sent => {
+          {this.props.user.sentRequests.map((sent, i) => {
             return (
-              <li className="list-group-item padding-left-2rem">{sent}</li>
+              <li key={i} className="list-group-item padding-left-2rem">
+                {sent}
+                <button
+                  type="button"
+                  className="btn btn-danger float-right line-height-75"
+                  onClick={this.cancelFriendRequest.bind(this, sent)}
+                >
+                  Cancel
+                </button>
+              </li>
             );
           })}
         </ul>
@@ -119,5 +147,9 @@ function mapStateToProps(state) {
 }
 
 export default requireAuth(
-  connect(mapStateToProps, { sendFriendRequest, fetchProfile })(Profile)
+  connect(mapStateToProps, {
+    sendFriendRequest,
+    fetchProfile,
+    cancelFriendRequest
+  })(Profile)
 );
