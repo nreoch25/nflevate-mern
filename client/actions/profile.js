@@ -65,3 +65,19 @@ export function declineFriendRequest(user, cancelUser) {
       });
   };
 }
+
+export function acceptFriendRequest(user, acceptUser) {
+  return dispatch => {
+    return axios
+      .post("/api/profile/request/accept", { user, acceptUser })
+      .then(response => {
+        dispatch({
+          type: UPDATE_PROFILE,
+          payload: response.data.profile
+        });
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+      });
+  };
+}

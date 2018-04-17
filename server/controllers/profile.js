@@ -1,11 +1,25 @@
 import User from "../models/user";
+import requireLogin from "../middleware/requireLogin";
 
 export default {
   setRouting: function(router) {
-    router.get("/api/profile/:user", this.getProfile);
-    router.post("/api/profile/request", this.friendRequest);
-    router.post("/api/profile/request/cancel", this.cancelFriendRequest);
-    router.post("/api/profile/request/decline", this.declineFriendRequest);
+    router.get("/api/profile/:user", requireLogin, this.getProfile);
+    router.post("/api/profile/request", requireLogin, this.friendRequest);
+    router.post(
+      "/api/profile/request/cancel",
+      requireLogin,
+      this.cancelFriendRequest
+    );
+    router.post(
+      "/api/profile/request/decline",
+      requireLogin,
+      this.declineFriendRequest
+    );
+    router.post(
+      "/api/profile/request/accept",
+      requireLogin,
+      this.acceptFriendRequest
+    );
   },
   friendRequest(req, res) {
     User.findOneAndUpdate(
@@ -26,7 +40,8 @@ export default {
               favouritePlayer: doc1.favouritePlayer,
               sentRequests: doc1.sentRequests,
               requests: doc1.requests,
-              totalRequests: doc1.totalRequests
+              totalRequests: doc1.totalRequests,
+              friendsList: doc1.friendsList
             };
             res.send({ sender: doc1, receiver: doc2 });
           })
@@ -53,7 +68,8 @@ export default {
               favouritePlayer: doc1.favouritePlayer,
               sentRequests: doc1.sentRequests,
               requests: doc1.requests,
-              totalRequests: doc1.totalRequests
+              totalRequests: doc1.totalRequests,
+              friendsList: doc1.friendsList
             };
             res.send({ profile: profileObj });
           })
@@ -83,7 +99,43 @@ export default {
               favouritePlayer: doc2.favouritePlayer,
               sentRequests: doc2.sentRequests,
               requests: doc2.requests,
-              totalRequests: doc2.totalRequests
+              totalRequests: doc2.totalRequests,
+              friendsList: doc2.friendsList
+            };
+            res.send({ profile: profileObj });
+          })
+          .catch(error => res.status(422).send({ error }));
+      })
+      .catch(error => res.status(422).send({ error }));
+  },
+  acceptFriendRequest(req, res) {
+    User.findOneAndUpdate(
+      { username: req.body.acceptUser },
+      {
+        $pull: { sentRequests: req.body.user },
+        $push: { friendsList: req.body.user }
+      },
+      { new: true }
+    )
+      .then(doc1 => {
+        User.findOneAndUpdate(
+          { username: req.body.user },
+          {
+            $inc: { totalRequests: -1 },
+            $pull: { requests: req.body.acceptUser },
+            $push: { friendsList: req.body.acceptUser }
+          },
+          { new: true }
+        )
+          .then(doc2 => {
+            const profileObj = {
+              username: doc2.username,
+              favouriteTeam: doc2.favouriteTeam,
+              favouritePlayer: doc2.favouritePlayer,
+              sentRequests: doc2.sentRequests,
+              requests: doc2.requests,
+              totalRequests: doc2.totalRequests,
+              friendsList: doc2.friendsList
             };
             res.send({ profile: profileObj });
           })
@@ -101,7 +153,8 @@ export default {
             favouritePlayer: document.favouritePlayer,
             sentRequests: document.sentRequests,
             requests: document.requests,
-            totalRequests: document.totalRequests
+            totalRequests: document.totalRequests,
+            friendsList: document.friendsList
           };
           return res.send({ profile: profileObj });
         }

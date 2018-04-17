@@ -1,10 +1,11 @@
 import Group from "../models/group";
 import GroupMessage from "../models/groupmessage";
+import requireLogin from "../middleware/requireLogin";
 
 export default {
   setRouting: function(router) {
     router.get("/api/group", this.getGroups);
-    router.post("/api/group/messages", this.groupMessages);
+    router.post("/api/group/messages", requireLogin, this.groupMessages);
   },
   getGroups: function(req, res) {
     Group.find({}, (err, groups) => {

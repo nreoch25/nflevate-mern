@@ -1,8 +1,9 @@
 import PrivateMessage from "../models/privatemessage";
+import requireLogin from "../middleware/requireLogin";
 
 export default {
   setRouting: function(router) {
-    router.post("/api/private/messages", this.privateMessages);
+    router.post("/api/private/messages", requireLogin, this.privateMessages);
   },
   privateMessages: function(req, res) {
     const { sender, receiver } = req.body;
