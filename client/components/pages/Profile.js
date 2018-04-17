@@ -72,47 +72,51 @@ class Profile extends Component {
   cancelFriendRequest(cancelUser) {
     this.props.cancelFriendRequest(this.props.user.username, cancelUser);
   }
-  renderSentRequests() {
-    if (this.props.user.sentRequests.length === 0) {
-      return (
-        <div className="card rounded-0 border-top-0">
-          <div className="card-header">Sent Friend Requests</div>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item padding-left-2rem disabled">
-              No Sent Friend Requests
-            </li>
-          </ul>
-        </div>
-      );
+  renderSentRequests({ sentRequests }) {
+    if (this.props.user.username === this.props.match.params.user) {
+      if (typeof sentRequests !== "undefined") {
+        if (sentRequests.length === 0) {
+          return (
+            <div className="card rounded-0 border-top-0">
+              <div className="card-header">Sent Friend Requests</div>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item padding-left-2rem disabled">
+                  No Sent Friend Requests
+                </li>
+              </ul>
+            </div>
+          );
+        }
+        return (
+          <div className="card rounded-0 border-top-0">
+            <div className="card-header">Sent Friend Requests</div>
+            <ul className="list-group list-group-flush">
+              {sentRequests.map((sent, i) => {
+                return (
+                  <li key={i} className="list-group-item padding-left-2rem">
+                    {sent}
+                    <button
+                      type="button"
+                      className="btn btn-danger float-right line-height-75"
+                      onClick={this.cancelFriendRequest.bind(this, sent)}
+                    >
+                      Cancel
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        );
+      }
     }
-    return (
-      <div className="card rounded-0 border-top-0">
-        <div className="card-header">Sent Friend Requests</div>
-        <ul className="list-group list-group-flush">
-          {this.props.user.sentRequests.map((sent, i) => {
-            return (
-              <li key={i} className="list-group-item padding-left-2rem">
-                {sent}
-                <button
-                  type="button"
-                  className="btn btn-danger float-right line-height-75"
-                  onClick={this.cancelFriendRequest.bind(this, sent)}
-                >
-                  Cancel
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
   }
   render() {
-    console.log("PROFILE", this.props.profile);
     const profileInfo = {
       username: this.props.match.params.user,
       favouriteTeam: this.props.profile.favouriteTeam,
-      favouritePlayer: this.props.profile.favouritePlayer
+      favouritePlayer: this.props.profile.favouritePlayer,
+      sentRequests: this.props.profile.sentRequests
     };
     return (
       <div className="container">
@@ -127,7 +131,7 @@ class Profile extends Component {
                 src={require("../../../static/images/profile.jpeg")}
               />
               {this.renderProfileLinks(profileInfo)}
-              {this.renderSentRequests()}
+              {this.renderSentRequests(profileInfo)}
             </div>
           </div>
           <div className="col-sm-8 no-padding-left">

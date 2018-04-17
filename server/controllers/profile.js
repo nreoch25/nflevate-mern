@@ -36,20 +36,25 @@ export default {
           { $inc: { totalRequests: -1 }, $pull: { requests: req.body.user } }
         )
           .then(doc2 => {
-            res.send({ user: doc1 });
+            const profileObj = {
+              favouriteTeam: doc1.favouriteTeam,
+              favouritePlayer: doc1.favouritePlayer,
+              sentRequests: doc1.sentRequests
+            };
+            res.send({ profile: profileObj });
           })
           .catch(error => res.status(422).send({ error }));
       })
       .catch(error => res.status(422).send({ error }));
   },
   getProfile(req, res) {
-    console.log(req.params.user);
     User.findOne({ username: req.params.user })
       .then(document => {
         if (document) {
           const profileObj = {
             favouriteTeam: document.favouriteTeam,
-            favouritePlayer: document.favouritePlayer
+            favouritePlayer: document.favouritePlayer,
+            sentRequests: document.sentRequests
           };
           return res.send({ profile: profileObj });
         }

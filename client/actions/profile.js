@@ -2,13 +2,14 @@ import axios from "axios";
 
 export const FETCH_PROFILE = "FETCH_PROFILE";
 export const SEND_FRIEND_REQUEST = "SEND_FRIEND_REQUEST";
-export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_PROFILE = "UPDATE_PROFILE";
 
 export function fetchProfile(user) {
   return dispatch => {
     return axios
       .get(`/api/profile/${user}`)
       .then(response => {
+        console.log("FETCH PROFILE", response);
         dispatch({
           type: FETCH_PROFILE,
           payload: response.data.profile
@@ -38,10 +39,9 @@ export function cancelFriendRequest(user, cancelUser) {
     return axios
       .post("/api/profile/request/cancel", { user, cancelUser })
       .then(response => {
-        console.log("UPDATED USER ACTIONS", response.data);
         dispatch({
-          type: UPDATE_USER,
-          payload: response.data.user
+          type: UPDATE_PROFILE,
+          payload: response.data.profile
         });
       })
       .catch(error => {
