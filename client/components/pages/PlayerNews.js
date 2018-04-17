@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import requireAuth from "../hoc/requireAuth";
 import { fetchPlayerNews } from "../../actions/news";
 
@@ -27,4 +28,4 @@ class PlayerNews extends Component {
   }
 }
 
-export default requireAuth(PlayerNews);
+export default requireAuth(connect(null, { fetchPlayerNews })(PlayerNews));

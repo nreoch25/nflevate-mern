@@ -21,6 +21,7 @@ import admin from "./controllers/admin";
 import groups from "./controllers/groups";
 import profile from "./controllers/profile";
 import privateMessage from "./controllers/privateMessage";
+import news from "./controllers/news";
 // SocketIO class
 import SocketIO from "./sockets/SocketIO";
 // import connect mongo
@@ -86,6 +87,7 @@ admin.setRouting(router);
 groups.setRouting(router);
 profile.setRouting(router);
 privateMessage.setRouting(router);
+news.setRouting(router);
 
 app.use(router);
 

@@ -7,6 +7,7 @@ export function fetchPlayerNews() {
       .get("/api/news/player")
       .then(response => {
         console.log("PLAYER NEWS ACTIONS", response.data);
+        // TODO parse xml string and figure out how to make array of objects
         // dispatch({
         //   type: FETCH_PLAYER_NEWS,
         //   payload: response.data
