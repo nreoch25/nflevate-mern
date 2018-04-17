@@ -7,6 +7,10 @@ export const Logout = loadable(() => import("./components/auth/Logout"));
 export const Admin = loadable(() => import("./components/pages/Admin"));
 export const Group = loadable(() => import("./components/pages/Group"));
 export const Profile = loadable(() => import("./components/pages/Profile"));
+export const PlayerNews = loadable(() =>
+  import("./components/pages/PlayerNews")
+);
+export const Articles = loadable(() => import("./components/pages/Articles"));
 export const FriendRequests = loadable(() =>
   import("./components/pages/FriendRequests")
 );

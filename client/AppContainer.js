@@ -38,6 +38,8 @@ class App extends Component {
                   path="/private/:sender/:receiver"
                   component={Routes.PrivateChat}
                 />
+                <Route exact path="/players" component={Routes.PlayerNews} />
+                <Route exact path="/articles" component={Routes.Articles} />
                 <Route component={Routes.PageNotFound} />
               </Switch>
             </div>

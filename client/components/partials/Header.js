@@ -21,6 +21,29 @@ class Header extends Component {
           <li className="nav-item dropdown">
             <a
               className="nav-link dropdown-toggle"
+              id="newsdropdown"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              href="#"
+            >
+              News
+            </a>
+            <div
+              className="dropdown-menu dropdown-menu-right"
+              aria-labelledby="newsdropdown"
+            >
+              <Link to="/players" className="dropdown-item">
+                Player News
+              </Link>
+              <Link to="/articles" className="dropdown-item">
+                Articles
+              </Link>
+            </div>
+          </li>
+          <li className="nav-item dropdown">
+            <a
+              className="nav-link dropdown-toggle"
               id="alertdropdown"
               data-toggle="dropdown"
               aria-haspopup="true"
