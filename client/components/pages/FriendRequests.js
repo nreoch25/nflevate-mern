@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import requireAuth from "../hoc/requireAuth";
-import { fetchProfile } from "../../actions/profile";
+import { fetchProfile, declineFriendRequest } from "../../actions/profile";
 
 class FriendRequests extends Component {
   componentDidMount() {
     this.props.fetchProfile(this.props.match.params.user);
   }
+  declineFriendRequest(cancelUser) {
+    this.props.declineFriendRequest(this.props.profile.username, cancelUser);
+  }
   displayFriendRequests() {
-    console.log("PROFILE", this.props.profile);
     if (typeof this.props.profile.requests !== "undefined") {
       if (this.props.profile.requests.length > 0) {
         return this.props.profile.requests.map((request, i) => {
@@ -27,7 +29,11 @@ class FriendRequests extends Component {
                   >
                     Accept
                   </button>
-                  <button type="button" className="btn btn-danger">
+                  <button
+                    onClick={this.declineFriendRequest.bind(this, request)}
+                    type="button"
+                    className="btn btn-danger"
+                  >
                     Decline
                   </button>
                 </div>
@@ -68,5 +74,7 @@ function mapStateToProps(state) {
 }
 
 export default requireAuth(
-  connect(mapStateToProps, { fetchProfile })(FriendRequests)
+  connect(mapStateToProps, { fetchProfile, declineFriendRequest })(
+    FriendRequests
+  )
 );

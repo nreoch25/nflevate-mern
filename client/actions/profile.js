@@ -49,3 +49,19 @@ export function cancelFriendRequest(user, cancelUser) {
       });
   };
 }
+
+export function declineFriendRequest(user, cancelUser) {
+  return dispatch => {
+    return axios
+      .post("/api/profile/request/decline", { user, cancelUser })
+      .then(response => {
+        dispatch({
+          type: UPDATE_PROFILE,
+          payload: response.data.profile
+        });
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+      });
+  };
+}
