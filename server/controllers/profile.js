@@ -18,6 +18,13 @@ export default {
           { $inc: { totalRequests: 1 }, $push: { requests: req.body.user } }
         )
           .then(doc2 => {
+            const profileObj = {
+              favouriteTeam: doc1.favouriteTeam,
+              favouritePlayer: doc1.favouritePlayer,
+              sentRequests: doc1.sentRequests,
+              requests: doc1.requests,
+              totalRequests: doc1.totalRequests
+            };
             res.send({ sender: doc1, receiver: doc2 });
           })
           .catch(error => res.status(422).send({ error }));
@@ -39,7 +46,9 @@ export default {
             const profileObj = {
               favouriteTeam: doc1.favouriteTeam,
               favouritePlayer: doc1.favouritePlayer,
-              sentRequests: doc1.sentRequests
+              sentRequests: doc1.sentRequests,
+              requests: doc1.requests,
+              totalRequests: doc1.totalRequests
             };
             res.send({ profile: profileObj });
           })
@@ -54,7 +63,9 @@ export default {
           const profileObj = {
             favouriteTeam: document.favouriteTeam,
             favouritePlayer: document.favouritePlayer,
-            sentRequests: document.sentRequests
+            sentRequests: document.sentRequests,
+            requests: document.requests,
+            totalRequests: document.totalRequests
           };
           return res.send({ profile: profileObj });
         }

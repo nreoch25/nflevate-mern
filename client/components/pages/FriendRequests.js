@@ -1,28 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import requireAuth from "../hoc/requireAuth";
+import { fetchProfile } from "../../actions/profile";
 
 class FriendRequests extends Component {
+  componentDidMount() {
+    this.props.fetchProfile(this.props.match.params.user);
+  }
   displayFriendRequests() {
-    console.log("USER", this.props.user);
-    if (this.props.user.requests.length > 0) {
-      return this.props.user.requests.map((request, i) => {
-        return (
-          <li key={i} className="list-group-item">
-            <img
-              src={require("../../../static/images/default.png")}
-              className="rounded-circle width-10-percent border border-primary float-left"
-            />
-            <div className="float-left width-90-percent">
-              <div className="padding-left-10 padding-right-10">
-                <h6 className="float-left margin-right-10">{request}</h6>
-                <button type="button" className="btn btn-success margin-right-10">Accept</button>
-                <button type="button" className="btn btn-danger">Decline</button>
+    console.log("PROFILE", this.props.profile);
+    if (typeof this.props.profile.requests !== "undefined") {
+      if (this.props.profile.requests.length > 0) {
+        return this.props.profile.requests.map((request, i) => {
+          return (
+            <li key={i} className="list-group-item">
+              <img
+                src={require("../../../static/images/default.png")}
+                className="rounded-circle width-10-percent border border-primary float-left"
+              />
+              <div className="float-left width-90-percent">
+                <div className="padding-left-10 padding-right-10">
+                  <h6 className="float-left margin-right-10">{request}</h6>
+                  <button
+                    type="button"
+                    className="btn btn-success margin-right-10"
+                  >
+                    Accept
+                  </button>
+                  <button type="button" className="btn btn-danger">
+                    Decline
+                  </button>
+                </div>
               </div>
-            </div>
-          </li>
-        );
-      });
+            </li>
+          );
+        });
+      }
     }
   }
   render() {
@@ -50,8 +63,10 @@ class FriendRequests extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.auth.user
+    profile: state.profile.profile
   };
 }
 
-export default requireAuth(connect(mapStateToProps, null)(FriendRequests));
+export default requireAuth(
+  connect(mapStateToProps, { fetchProfile })(FriendRequests)
+);

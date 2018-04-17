@@ -56,7 +56,7 @@ app.use(
   session({
     secret: serverConfig.expressSessionSecret,
     cookie: {
-      maxAge: 480000
+      maxAge: 960000
     },
     resave: true,
     saveUninitialized: false,
