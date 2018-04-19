@@ -27,6 +27,8 @@ export function sendFriendRequest(user, friend) {
       .post("/api/profile/request", { user, friend })
       .then(response => {
         console.log("SENT FRIEND REQUEST", response.data);
+        // display request modal
+        window.jQuery("#requestModal").modal("show");
       })
       .catch(error => {
         console.log("ERROR", error);
@@ -39,6 +41,8 @@ export function cancelFriendRequest(user, cancelUser) {
     return axios
       .post("/api/profile/request/cancel", { user, cancelUser })
       .then(response => {
+        // display request modal
+        window.jQuery("#requestModal").modal("show");
         dispatch({
           type: UPDATE_PROFILE,
           payload: response.data.profile

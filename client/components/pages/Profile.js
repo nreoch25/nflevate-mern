@@ -9,12 +9,14 @@ import {
 import requireAuth from "../hoc/requireAuth";
 import ProfileInformation from "../partials/profile/ProfileInformation";
 import ProfileUpdate from "../partials/profile/ProfileUpdate";
+import RequestModal from "../partials/RequestModal";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: "display"
+      mode: "display",
+      modalMessage: ""
     };
   }
   componentDidMount() {
@@ -33,6 +35,7 @@ class Profile extends Component {
   };
   sendFriendRequest(username, friend) {
     this.props.sendFriendRequest(username, friend);
+    this.setState({ modalMessage: "Your friend request has been sent!" });
   }
   renderProfileLinks({ username }) {
     if (this.props.user.username === this.props.match.params.user) {
@@ -71,6 +74,7 @@ class Profile extends Component {
   }
   cancelFriendRequest(cancelUser) {
     this.props.cancelFriendRequest(this.props.user.username, cancelUser);
+    this.setState({ modalMessage: "Your friend request has been cancelled." });
   }
   renderSentRequests({ sentRequests }) {
     if (this.props.user.username === this.props.match.params.user) {
@@ -138,6 +142,7 @@ class Profile extends Component {
             {this.displayProfileContent(profileInfo)}
           </div>
         </div>
+        <RequestModal message={this.state.modalMessage} />
       </div>
     );
   }
