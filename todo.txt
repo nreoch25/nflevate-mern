@@ -1,0 +1,20 @@
+1) Add Friend Request functionality
+  * Handle UI responses. ie. sent request, accept/decline, and cancel requests
+  * Display List of users friends in their profile. Collapsable menu
+
+2) Get Player news
+  * cors issue. Fetch from server.
+
+
+3) Add User profile pages
+  Ability to upload profile pic and profile information
+    * fav team, player.
+    * Need to be able to trigger a private chat
+    * Need to be able to make friend requests
+
+4) Redis caching server
+  * Fetching User/Profile Information
+  * Fetching Groups Information
+
+
+For later *Prevent favicon requests.
