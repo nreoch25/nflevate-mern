@@ -7,9 +7,8 @@ export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export function fetchProfile(user) {
   return dispatch => {
     return axios
-      .get(`/api/profile/${user}`)
+      .get(`http://localhost:8000/api/profile/${user}`)
       .then(response => {
-        console.log("FETCH PROFILE", response);
         dispatch({
           type: FETCH_PROFILE,
           payload: response.data.profile
@@ -24,9 +23,8 @@ export function fetchProfile(user) {
 export function sendFriendRequest(user, friend) {
   return dispatch => {
     return axios
-      .post("/api/profile/request", { user, friend })
+      .post("http://localhost:8000/api/profile/request", { user, friend })
       .then(response => {
-        console.log("SENT FRIEND REQUEST", response.data);
         // display request modal
         window.jQuery("#requestModal").modal("show");
       })
@@ -39,7 +37,10 @@ export function sendFriendRequest(user, friend) {
 export function cancelFriendRequest(user, cancelUser) {
   return dispatch => {
     return axios
-      .post("/api/profile/request/cancel", { user, cancelUser })
+      .post("http://localhost:8000/api/profile/request/cancel", {
+        user,
+        cancelUser
+      })
       .then(response => {
         // display request modal
         window.jQuery("#requestModal").modal("show");
@@ -57,8 +58,13 @@ export function cancelFriendRequest(user, cancelUser) {
 export function declineFriendRequest(user, cancelUser) {
   return dispatch => {
     return axios
-      .post("/api/profile/request/decline", { user, cancelUser })
+      .post("http://localhost:8000/api/profile/request/decline", {
+        user,
+        cancelUser
+      })
       .then(response => {
+        // display request modal
+        window.jQuery("#requestModal").modal("show");
         dispatch({
           type: UPDATE_PROFILE,
           payload: response.data.profile
@@ -73,8 +79,13 @@ export function declineFriendRequest(user, cancelUser) {
 export function acceptFriendRequest(user, acceptUser) {
   return dispatch => {
     return axios
-      .post("/api/profile/request/accept", { user, acceptUser })
+      .post("http://localhost:8000/api/profile/request/accept", {
+        user,
+        acceptUser
+      })
       .then(response => {
+        // display request modal
+        window.jQuery("#requestModal").modal("show");
         dispatch({
           type: UPDATE_PROFILE,
           payload: response.data.profile

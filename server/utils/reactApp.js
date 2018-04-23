@@ -8,7 +8,6 @@ import AppContainer from "../../client/AppContainer";
 import { configureStore } from "../../client/store";
 import { fetchGroups } from "../../client/actions/groups";
 import renderer from "./renderer";
-import config from "../config";
 
 const reactApp = (req, res, next) => {
   const renderApp = async () => {
@@ -35,7 +34,7 @@ const reactApp = (req, res, next) => {
   const store = configureStore();
 
   // Server side rendering data needed on initial load
-  const dataPromises = [store.dispatch(fetchGroups(config.API_HOST))];
+  const dataPromises = [store.dispatch(fetchGroups())];
 
   Promise.all(dataPromises).then(response => {
     renderApp();

@@ -6,16 +6,29 @@ import {
   declineFriendRequest,
   acceptFriendRequest
 } from "../../actions/profile";
+import RequestModal from "../partials/RequestModal";
 
 class FriendRequests extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalMessage: ""
+    };
+  }
   componentDidMount() {
     this.props.fetchProfile(this.props.match.params.user);
   }
   acceptFriendRequest(acceptUser) {
     this.props.acceptFriendRequest(this.props.profile.username, acceptUser);
+    this.setState({
+      modalMessage: `You and ${acceptUser} are now NFLevate friends!`
+    });
   }
   declineFriendRequest(cancelUser) {
     this.props.declineFriendRequest(this.props.profile.username, cancelUser);
+    this.setState({
+      modalMessage: `You have declined the friend request from ${cancelUser}`
+    });
   }
   displayFriendRequests() {
     if (typeof this.props.profile.requests !== "undefined") {
@@ -70,6 +83,7 @@ class FriendRequests extends Component {
             <div className="row" />
           </div>
         </div>
+        <RequestModal message={this.state.modalMessage} />
       </div>
     );
   }

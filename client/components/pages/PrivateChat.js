@@ -35,7 +35,6 @@ class PrivateChat extends Component {
     }
   }
   render() {
-    console.log("PRIVATE MESSAGES", this.props.privateMessages);
     const userObject = {
       sender: this.props.match.params.sender,
       receiver: this.props.match.params.receiver

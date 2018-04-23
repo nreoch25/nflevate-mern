@@ -9,7 +9,7 @@ export const ONLINE_USERS = "ONLINE_USERS";
 export function signupUser({ username, email, password }, history) {
   return dispatch => {
     axios
-      .post("/auth/signup", { username, email, password })
+      .post("http://localhost:8000/auth/signup", { username, email, password })
       .then(response => {
         console.log("Successful Signup", response.data.user);
 
@@ -29,7 +29,7 @@ export function signupUser({ username, email, password }, history) {
 export function loginUser({ email, password }, history) {
   return dispatch => {
     axios
-      .post("/auth/login", { email, password })
+      .post("http://localhost:8000/auth/login", { email, password })
       .then(response => {
         console.log("Successful Login", response.data.user);
 
@@ -48,7 +48,8 @@ export function loginUser({ email, password }, history) {
 
 export function logoutUser(history) {
   return dispatch => {
-    axios.post("/auth/logout").then(() => {
+    axios.post("http://localhost:8000/auth/logout").then(response => {
+      console.log("Successfully Logged out");
       // disconnect socketIO
       SocketIO.disconnect();
 
@@ -69,7 +70,7 @@ export function authError(error) {
 
 export function currentUser() {
   return dispatch => {
-    axios.post("/auth/user").then(response => {
+    axios.post("http://localhost:8000/auth/user").then(response => {
       const user = response.data.user;
       if (user) {
         // initiate socket.io only if user wasn't already authenticated
@@ -94,7 +95,7 @@ export function currentUser() {
 export function fetchOnlineUsers(groupName) {
   return dispatch => {
     return axios
-      .get("/auth/users")
+      .get("http://localhost:8000/auth/users")
       .then(response => {
         dispatch({
           type: ONLINE_USERS,

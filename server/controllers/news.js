@@ -3,7 +3,6 @@ import axios from "axios";
 
 export default {
   setRouting: function(router) {
-    console.log("HERE");
     router.get("/api/news/player", requireLogin, this.getPlayerNews);
   },
   getPlayerNews: function(req, res) {

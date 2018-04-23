@@ -87,6 +87,8 @@ export default {
                 resolve(document);
               }
             );
+          } else {
+            reject("user not in any groups");
           }
         }
       );
@@ -94,23 +96,23 @@ export default {
   },
   removeFromGroup(user) {
     return new Promise((resolve, reject) => {
-      Group.findOne({ currentUsers: user })
-        .then(document => {
-          if (document) {
-            Group.findOneAndUpdate(
-              { name: document.name },
-              { $pull: { currentUsers: user } },
-              { new: true },
-              (error, document) => {
-                if (error) {
-                  return reject(error.message);
-                }
-                resolve(document);
+      Group.findOne({ currentUsers: user }, (error, document) => {
+        if (document) {
+          Group.findOneAndUpdate(
+            { name: document.name },
+            { $pull: { currentUsers: user } },
+            { new: true },
+            (error, document) => {
+              if (error) {
+                return reject("user not in any groups");
               }
-            );
-          }
-        })
-        .catch(error => reject(error));
+              resolve(document);
+            }
+          );
+        } else {
+          reject("user not in any groups");
+        }
+      });
     });
   }
 };

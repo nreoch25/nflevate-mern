@@ -4,12 +4,12 @@ export const FETCH_GROUPS = "FETCH_GROUPS";
 export const GROUP_MESSAGES = "GROUP_MESSAGES";
 export const GROUP_USERS = "GROUP_USERS";
 
-export function fetchGroups(host) {
+export function fetchGroups() {
   // Need host because this is a server side call
   // on the server call it was the whole url
   return dispatch => {
     return axios
-      .get(`${host}/api/group`)
+      .get("http://localhost:8000/api/group")
       .then(response => {
         dispatch({
           type: FETCH_GROUPS,
@@ -25,7 +25,7 @@ export function fetchGroups(host) {
 export function fetchGroupMessages(groupName) {
   return dispatch => {
     return axios
-      .post("/api/group/messages", { groupName })
+      .post("http://localhost:8000/api/group/messages", { groupName })
       .then(response => {
         dispatch({
           type: GROUP_MESSAGES,
@@ -41,7 +41,7 @@ export function fetchGroupMessages(groupName) {
 export function filterGroups(val) {
   return dispatch => {
     axios
-      .get("/api/group")
+      .get("http://localhost:8000/api/group")
       .then(response => {
         let filteredGroups = response.data.groups.filter(group =>
           group.name.includes(val)
