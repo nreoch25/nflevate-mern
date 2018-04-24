@@ -115,12 +115,39 @@ class Profile extends Component {
       }
     }
   }
+  renderFriendsList({ friendsList }) {
+    if (typeof friendsList !== "undefined") {
+      if (friendsList.length > 0) {
+        return (
+          <div className="card rounded-0 border-top-0">
+            <div className="card-header">Friends List</div>
+            <ul className="list-group list-group-flush">
+              {friendsList.map((friend, i) => {
+                return (
+                  <li key={i} className="list-group-item padding-left-2rem">
+                    <Link
+                      className="remove-underline"
+                      to={`/profile/${friend}`}
+                    >
+                      {friend}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        );
+      }
+    }
+  }
   render() {
+    console.log(this.props);
     const profileInfo = {
       username: this.props.match.params.user,
       favouriteTeam: this.props.profile.favouriteTeam,
       favouritePlayer: this.props.profile.favouritePlayer,
-      sentRequests: this.props.profile.sentRequests
+      sentRequests: this.props.profile.sentRequests,
+      friendsList: this.props.profile.friendsList
     };
     return (
       <div className="container">
@@ -136,6 +163,7 @@ class Profile extends Component {
               />
               {this.renderProfileLinks(profileInfo)}
               {this.renderSentRequests(profileInfo)}
+              {this.renderFriendsList(profileInfo)}
             </div>
           </div>
           <div className="col-sm-8 no-padding-left">
